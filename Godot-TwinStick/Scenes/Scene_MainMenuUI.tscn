@@ -1,0 +1,98 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/BTN-Quit.gd" type="Script" id=1]
+
+[node name="Scene_MainMenuUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_right = 80.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameTitle" type="Label" parent="VBoxContainer2"]
+margin_right = 160.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+text = "Twin Stick Shooter"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+margin_top = 64.0
+margin_right = 160.0
+margin_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BTN-HostGame" type="Button" parent="VBoxContainer2/VBoxContainer"]
+margin_top = 142.0
+margin_right = 160.0
+margin_bottom = 202.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 160, 60 )
+size_flags_horizontal = 0
+text = "Host Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BTN-JoinGame" type="Button" parent="VBoxContainer2/VBoxContainer"]
+margin_top = 206.0
+margin_right = 160.0
+margin_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 160, 60 )
+size_flags_horizontal = 0
+text = "Join Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BTN-Options" type="Button" parent="VBoxContainer2/VBoxContainer"]
+margin_top = 270.0
+margin_right = 160.0
+margin_bottom = 330.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 160, 60 )
+size_flags_horizontal = 0
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BTN-Quit" type="Button" parent="VBoxContainer2/VBoxContainer"]
+margin_top = 334.0
+margin_right = 160.0
+margin_bottom = 394.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 160, 60 )
+size_flags_horizontal = 0
+text = "Quit"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="VBoxContainer2/VBoxContainer/BTN-Quit" to="VBoxContainer2/VBoxContainer/BTN-Quit" method="_on_BTNQuit_pressed"]
