@@ -2,10 +2,9 @@ extends Node
 
 enum GameScene{
 	Start,
-	MainMenu,
-	HostGame,
-	JoinGame,
-	MainGame
+	Lobby,
+	MainGame,
+	TestEnviro
    }
 
 #
@@ -14,13 +13,10 @@ enum GameScene{
 var currentGameScene = GameScene.Start
 
 
-
-
 #
 # Node functions
 #
 func _ready():
-	#_load_scene(GameScene.MainMenu)
 	pass
 
 
@@ -31,34 +27,25 @@ func _load_scene(newSceneID):
 	if(newSceneName == ""):
 		return
 
-	_unload_current_scene()
-	var newSceneResource = load("res://Scenes/" + newSceneName + ".tscn")
-	var newScene = newSceneResource.instance()
-	add_child(newScene)
-
-
-
-
-func _unload_current_scene():
 	var oldSceneName = _get_scene_name(currentGameScene)
-	if(oldSceneName == ""):
-		return
+	if(oldSceneName != ""):
+		get_tree().get_root().remove_child(oldSceneName)
+		oldSceneName.call_deferred("free")
 
-	remove_child(oldSceneName)
-	oldSceneName.call_deferred("free")
+	var newScene = load("res://Scenes/" + newSceneName + ".tscn").instance()
+	get_tree().get_root().get_node("Lobby").hide()
+	get_tree().get_root().add_child(newScene)
 
 
 
 
 func _get_scene_name(sceneID):
 	match(sceneID):
-		GameScene.MainMenu:
-			return "Scene_MainMenu"
-		GameScene.HostGame:
-			return "Scene_HostGame"
-		GameScene.JoinGame:
-			return "Scene_JoinGame"
+		GameScene.Lobby:
+			return ""
 		GameScene.MainGame:
-			return "Scene_MainGame"
+			return "MainGame"
+		GameScene.TestEnviro:
+			return "TestEnviro"
 		_:
 			return ""
