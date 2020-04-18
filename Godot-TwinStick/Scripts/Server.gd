@@ -11,10 +11,10 @@ extends Node
 # Node functions
 #
 func _ready():
-    pass
+	pass
 
 
 
 
 func _process(delta):
-    pass
+	pass
