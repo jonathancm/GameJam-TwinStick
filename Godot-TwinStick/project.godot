@@ -16,14 +16,31 @@ _global_script_class_icons={
 [application]
 
 config/name="GameJam-TwinStick"
-run/main_scene="res://Scenes/Lobby.tscn"
+run/main_scene="res://InteractionSystem/InteractionScene.tscn"
 config/icon="res://icon.png"
 
-[autoload]
+[input]
 
-sceneLoader="*res://Scripts/SceneLoader.gd"
-networkController="*res://Scripts/NetworkController.gd"
-gameController="*res://Scripts/GameController.gd"
+control_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":87,"unicode":0,"echo":false,"script":null)
+ ]
+}
+control_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"unicode":0,"echo":false,"script":null)
+ ]
+}
+control_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
+ ]
+}
+control_right={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [rendering]
 
