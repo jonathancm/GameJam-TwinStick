@@ -10,6 +10,7 @@ onready var mouse_direction = Vector3.ZERO
 onready var velocity = Vector3.ZERO
 export var max_speed = 0.5
 export var inertia = 0.5
+export var gravity = 9.8
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,8 +31,10 @@ func _physics_process(dt:float):
 	var targetVelocity = max_speed * left_stick.normalized()
 	
 	velocity = velocity.linear_interpolate(
-					Vector3(targetVelocity.x, 0, targetVelocity.y), 
+					Vector3(targetVelocity.x, velocity.y, targetVelocity.y), 
 					dt*(1.0/inertia))
+					
+	velocity.y -= gravity*dt
 	
 	velocity = move_and_slide(velocity, Vector3.UP)
 	

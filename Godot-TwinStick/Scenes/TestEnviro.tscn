@@ -500,5 +500,5 @@ shadow_enabled = true
 shadow_bias = 0.0
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 3.04532, 0 )
+transform = Transform( 0.707107, -0.612373, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 0, 3.04532, 0 )
 script = ExtResource( 8 )
