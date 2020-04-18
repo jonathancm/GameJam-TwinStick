@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Sources/Rock_03.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Sources/PineTree.obj" type="ArrayMesh" id=2]
@@ -7,10 +7,13 @@
 [ext_resource path="res://Sources/Rock_02.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Prefabs/Bunch_01.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Guillaume.tres" type="Environment" id=7]
+[ext_resource path="res://InteractionSystem/CameraController.gd" type="Script" id=8]
+[ext_resource path="res://InteractionSystem/InteractionSceneScript.gd" type="Script" id=9]
 
 [sub_resource type="QuadMesh" id=1]
 
-[node name="Spatial" type="Spatial"]
+[node name="Environment" type="Spatial"]
+script = ExtResource( 9 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 127.831, 0, 0, 0, -5.58765e-06, 127.831, 0, -127.831, -5.58765e-06, 0, 0, 0 )
@@ -495,3 +498,7 @@ environment = ExtResource( 7 )
 transform = Transform( 0.846082, 0.373231, -0.380585, 0, 0.713972, 0.700175, 0.533054, -0.592405, 0.604078, 0, 3.18962, 0 )
 shadow_enabled = true
 shadow_bias = 0.0
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 3.04532, 0 )
+script = ExtResource( 8 )
