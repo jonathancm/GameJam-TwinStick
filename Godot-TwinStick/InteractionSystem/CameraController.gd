@@ -30,18 +30,28 @@ func _process(delta):
 
 func GetLeftStick() -> Vector2:
 	
-	var result = Vector2.ZERO
+	var stick = Vector2.ZERO
 	
 	if Input.is_action_pressed("control_up"):
-		result += Vector2.UP
+		stick += Vector2.UP
 	if Input.is_action_pressed("control_down"):
-		result += Vector2.DOWN
+		stick += Vector2.DOWN
 	if Input.is_action_pressed("control_left"):
-		result += Vector2.LEFT
+		stick += Vector2.LEFT
 	if Input.is_action_pressed("control_right"):
-		result += Vector2.RIGHT
+		stick += Vector2.RIGHT
 	
-	return result;
+	var forward:Vector3 = global_transform.basis.z
+	forward.y = 0
+	forward = forward.normalized()
+	var forward2 = Vector2(forward.x, forward.z)
+	
+	var right:Vector3 = global_transform.basis.x
+	right.y = 0
+	right = right.normalized()
+	var right2 = Vector2(right.x, right.z)
+	
+	return stick.y * forward2 + stick.x * right2
 	
 	
 func _process_camera_position(dt:float):

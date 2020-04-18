@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sources/Rock_02.obj" type="ArrayMesh" id=1]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.706663
+
+[node name="Rock_B" type="Spatial"]
+
+[node name="Rock_02" type="MeshInstance" parent="."]
+transform = Transform( 0.970804, 0, -0.239872, 0, 1, 0, 0.239872, 0, 0.970804, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 1 )
