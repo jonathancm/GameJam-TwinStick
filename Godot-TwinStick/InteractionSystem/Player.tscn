@@ -12,15 +12,17 @@ height = 0.234796
 
 [sub_resource type="CubeMesh" id=3]
 
-[node name="Player" type="RigidBody"]
+[node name="Player" type="KinematicBody"]
 script = ExtResource( 3 )
+max_speed = 5.0
+inertia = 0.1
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.338292, -1.47872e-08 )
+transform = Transform( -1.62921e-07, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 1.62921e-07, 7.12149e-15, -1.47872e-08, 0.338292, 2.40914e-15 )
 shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 0.221011, 0, 0, 0, -9.66068e-09, 0.221011, 0, -0.221011, -9.66068e-09, 0, 0.339123, 2.88879e-08 )
+transform = Transform( -3.60073e-08, -0.221011, -9.66068e-09, 0, -9.66068e-09, 0.221011, -0.221011, 3.60073e-08, 1.57392e-15, 2.88879e-08, 0.339123, -4.70644e-15 )
 mesh = SubResource( 2 )
 material/0 = ExtResource( 1 )
 
@@ -33,5 +35,3 @@ material/0 = ExtResource( 2 )
 transform = Transform( -0.0952053, -0.633908, 9.17004e-09, 0, -2.86865e-08, -0.217186, 0.355311, -0.169855, 2.4571e-09, -0.245437, -2.57266e-08, 1.42546 )
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
-
-[node name="Player" type="Spatial" parent="."]

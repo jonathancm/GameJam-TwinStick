@@ -1,12 +1,29 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://InteractionSystem/InteractionSceneScript.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Floor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://InteractionSystem/CameraController.gd" type="Script" id=3]
+
+[sub_resource type="BoxShape" id=1]
 
 [node name="InteractionScene" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.813009, 0.582251, 0, -0.582251, 0.813009, 0, 1.1549, 1.64347 )
+transform = Transform( 1, 0, 0, 0, 0.560249, 0.828324, 0, -0.828324, 0.560249, 0, 2.9453, 1.84445 )
+script = ExtResource( 3 )
+distance = 5.0
 
 [node name="Floor" parent="." instance=ExtResource( 2 )]
+
+[node name="Floor2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3686, -0.345578, 0.0539744 )
+
+[node name="Floor3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40905, -0.345578, -4.41723 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+shape = SubResource( 1 )
