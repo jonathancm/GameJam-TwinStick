@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Sources/Rock_03.obj" type="ArrayMesh" id=1]
-[ext_resource path="res://Sources/PineTree.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Prefabs/Rock_B.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Rock_C.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Materials/M_Ground.tres" type="Material" id=3]
 [ext_resource path="res://Prefabs/PineTree_01.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sources/Rock_02.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Prefabs/Bunch_01.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Guillaume.tres" type="Environment" id=7]
 [ext_resource path="res://InteractionSystem/CameraController.gd" type="Script" id=8]
@@ -293,201 +292,115 @@ transform = Transform( -0.672548, 0, -0.740054, 0, 1, 0, 0.740054, 0, -0.672548,
 
 [node name="Trees" type="Spatial" parent="Environment"]
 
-[node name="PineTree2" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.30913, 0.00119495, 6.09489 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree3" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60292, 0.00119495, 3.14786 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree4" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.05597, 0.00119495, 2.15591 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree20" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.13438, 0.00119495, 0.483248 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree5" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.11312, 0.001194, -7.25385 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree6" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0258, 0.00119495, -2.86764 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree7" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86536, 0.00119495, -5.18558 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree8" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.883823, -0.173778, -2.64361 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree9" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79012, -0.374547, -0.200283 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree10" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.831729, -0.374547, 2.52278 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree11" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00642, -0.374546, 7.40958 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree12" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.32857, -0.374545, 3.04732 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree13" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.85604, -0.374545, -1.08436 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree14" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.186523, -0.241214, -8.1141 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree15" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.95297, -0.374547, -9.17695 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree16" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.39373, -0.374548, -4.17725 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree18" type="MeshInstance" parent="Environment/Trees"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.56387, -0.374548, -3.62755 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
-
-[node name="PineTree19" type="MeshInstance" parent="Environment/Trees"]
+[node name="PineTree_03" parent="Environment/Trees" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.35585, -0.374548, -3.32322 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
 
-[node name="PineTree17" type="MeshInstance" parent="Environment/Trees"]
+[node name="PineTree_01" parent="Environment/Trees" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.27632, -0.374548, -4.28357 )
-mesh = ExtResource( 2 )
-material/0 = null
-material/1 = null
+
+[node name="PineTree_02" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.30913, 0.00119495, 6.09489 )
+
+[node name="PineTree_17" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60292, 0.00119495, 3.14786 )
+
+[node name="PineTree_16" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.05597, 0.00119495, 2.15591 )
+
+[node name="PineTree_15" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.13438, 0.00119495, 0.483248 )
+
+[node name="PineTree_14" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.11312, 0.001194, -7.25385 )
+
+[node name="PineTree_18" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0258, 0.00119495, -2.86764 )
+
+[node name="PineTree_13" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.86536, 0.00119495, -5.18558 )
+
+[node name="PineTree_12" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.883823, -0.173778, -2.64361 )
+
+[node name="PineTree_11" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.79012, -0.374547, -0.200283 )
+
+[node name="PineTree_10" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.831729, -0.374547, 2.52278 )
+
+[node name="PineTree_19" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.00642, -0.374546, 7.40958 )
+
+[node name="PineTree_09" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.32857, -0.374545, 3.04732 )
+
+[node name="PineTree_08" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.85604, -0.374545, -1.08436 )
+
+[node name="PineTree_07" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.186523, -0.241214, -8.1141 )
+
+[node name="PineTree_06" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.95297, -0.374547, -9.17695 )
+
+[node name="PineTree_05" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.39373, -0.374548, -4.17725 )
+
+[node name="PineTree_04" parent="Environment/Trees" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.56387, -0.374548, -3.62755 )
 
 [node name="Rocks" type="Spatial" parent="Environment"]
 
-[node name="Rock_02" type="MeshInstance" parent="Environment/Rocks"]
-transform = Transform( 0.826796, 0, -0.562502, 0, 1, 0, 0.562502, 0, 0.826796, 3.28497, -0.0155884, -0.140337 )
-mesh = ExtResource( 5 )
-material/0 = null
+[node name="Rock_B" parent="Environment/Rocks" instance=ExtResource( 1 )]
+transform = Transform( 0.805763, 0, -0.592238, 0, 1, 0, 0.592238, 0, 0.805763, 3.48547, 0, -0.31838 )
 
-[node name="Rock_17" type="MeshInstance" parent="Environment/Rocks"]
-transform = Transform( 0.826796, 0, -0.562502, 0, 1, 0, 0.562502, 0, 0.826796, 0.126171, -0.0155884, -9.20752 )
-mesh = ExtResource( 5 )
-material/0 = null
+[node name="Rock_B2" parent="Environment/Rocks" instance=ExtResource( 1 )]
+transform = Transform( 0.170123, 0, -0.985423, 0, 1, 0, 0.985423, 0, 0.170123, -0.377788, -0.0155884, 8.70888 )
 
-[node name="Rock_15" type="MeshInstance" parent="Environment/Rocks"]
-transform = Transform( -0.0526149, 0, -0.998615, 0, 1, 0, 0.998615, 0, -0.0526149, -0.377788, -0.0155884, 8.70888 )
-mesh = ExtResource( 5 )
-material/0 = null
-
-[node name="Rock_03" type="MeshInstance" parent="Environment/Rocks"]
-transform = Transform( -0.485481, 0, -0.874247, 0, 1, 0, 0.874247, 0, -0.485481, -6.24016, -0.0155855, -2.18305 )
-mesh = ExtResource( 5 )
-material/0 = null
-
-[node name="Rock_04" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_B3" parent="Environment/Rocks" instance=ExtResource( 1 )]
 transform = Transform( -0.771902, 0.534215, -0.344647, 0, 0.542119, 0.840302, 0.635741, 0.648631, -0.418463, -6.33597, -0.128544, 6.62647 )
-mesh = ExtResource( 5 )
-material/0 = null
 
-[node name="Rock_05" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_B4" parent="Environment/Rocks" instance=ExtResource( 1 )]
+transform = Transform( 0.826796, 0, -0.562502, 0, 1, 0, 0.562502, 0, 0.826796, 0.126171, -0.0155884, -9.20752 )
+
+[node name="Rock_B5" parent="Environment/Rocks" instance=ExtResource( 1 )]
+transform = Transform( -0.485481, 0, -0.874247, 0, 1, 0, 0.874247, 0, -0.485481, -6.24016, -0.0155855, -2.18305 )
+
+[node name="Rock_C" parent="Environment/Rocks" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.184987, 0, -0.358224 )
+
+[node name="Rock_C8" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, 8.78347, -0.0330634, -3.20278 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_16" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C9" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, 9.04467, -0.0330634, 1.63523 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_06" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C7" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, 7.64089, -0.0330634, 4.93261 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_07" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C10" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, 2.40879, -0.0330644, 5.5546 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_13" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C11" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, -9.38867, -0.0330644, 0.761131 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_14" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C12" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, -6.35582, -0.0330634, -6.60636 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_08" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C6" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, 6.40264, -0.0330634, 9.32559 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_09" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C5" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, -3.88279, -0.0330625, 9.29117 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_10" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C4" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, -4.21299, -0.0330625, -9.39114 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_11" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C3" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, 1.17197, -0.0330615, -5.14962 )
-mesh = ExtResource( 1 )
-material/0 = null
 
-[node name="Rock_12" type="MeshInstance" parent="Environment/Rocks"]
+[node name="Rock_C2" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, 4.46839, -0.0330606, -9.53646 )
-mesh = ExtResource( 1 )
-material/0 = null
 
 [node name="Lighting" type="Spatial" parent="."]
 
