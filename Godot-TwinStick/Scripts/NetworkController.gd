@@ -4,7 +4,7 @@ extends Node
 const DEFAULT_PORT = 10567
 
 # Max number of players.
-const MAX_PEERS = 12
+const MAX_PEERS = 4
 
 # Name for my player.
 var player_name = "Player1"
@@ -69,60 +69,6 @@ func unregister_player(id):
 	emit_signal("player_list_changed")
 
 
-remote func pre_start_game(spawn_points):
-	# Change scene.
-	var gameScene = load("res://Scenes/Prototype0.tscn").instance()
-	get_tree().get_root().add_child(gameScene)
-
-	get_tree().get_root().get_node("Lobby").hide()
-
-#	var player_scene = load("res://player.tscn")
-#
-#	for p_id in spawn_points:
-#		var spawn_pos = gameScene.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
-#		var player = player_scene.instance()
-#
-#		player.set_name(str(p_id)) # Use unique ID as node name.
-#		player.position=spawn_pos
-#		player.set_network_master(p_id) #set unique id as master.
-#
-#		if p_id == get_tree().get_network_unique_id():
-#			# If node for this peer id, set name.
-#			player.set_player_name(player_name)
-#		else:
-#			# Otherwise set name from peer.
-#			player.set_player_name(players[p_id])
-#
-#		gameScene.get_node("Players").add_child(player)
-#
-#	# Set up score.
-#	gameScene.get_node("Score").add_player(get_tree().get_network_unique_id(), player_name)
-#	for pn in players:
-#		gameScene.get_node("Score").add_player(pn, players[pn])
-#
-#	if not get_tree().is_network_server():
-#		# Tell server we are ready to start.
-#		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
-#	elif players.size() == 0:
-#		post_start_game()
-
-
-remote func post_start_game():
-	get_tree().set_pause(false) # Unpause and unleash the game!
-
-
-remote func ready_to_start(id):
-	assert(get_tree().is_network_server())
-
-	if not id in players_ready:
-		players_ready.append(id)
-
-	if players_ready.size() == players.size():
-		for p in players:
-			rpc_id(p, "post_start_game")
-		post_start_game()
-
-
 func host_game(new_player_name):
 	player_name = new_player_name
 	var host = NetworkedMultiplayerENet.new()
@@ -156,10 +102,10 @@ func begin_game():
 		spawn_points[p] = spawn_point_idx
 		spawn_point_idx += 1
 	# Call to pre-start game with the spawn points.
-	for p in players:
-		rpc_id(p, "pre_start_game", spawn_points)
+	for p in networkController.players:
+		rpc_id(p, "gameController.pre_start_game", spawn_points)
 
-	pre_start_game(spawn_points)
+	gameController.pre_start_game(spawn_points)
 
 
 func end_game():

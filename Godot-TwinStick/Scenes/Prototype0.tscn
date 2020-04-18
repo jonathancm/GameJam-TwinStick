@@ -38,3 +38,22 @@ material/0 = null
 
 [node name="Camera" type="Camera" parent="DynamicEnvironment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4 )
+
+[node name="SpawnPoints" type="Spatial" parent="."]
+
+[node name="0" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+
+[node name="1" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+
+[node name="2" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
+
+[node name="3" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+
+[node name="4" type="Spatial" parent="SpawnPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2 )
+
+[node name="Players" type="Spatial" parent="."]

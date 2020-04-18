@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 
 sceneLoader="*res://Scripts/SceneLoader.gd"
 networkController="*res://Scripts/NetworkController.gd"
+gameController="*res://Scripts/GameController.gd"
 
 [rendering]
 
