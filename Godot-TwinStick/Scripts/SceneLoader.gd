@@ -1,4 +1,4 @@
-extends Spatial
+extends Node
 
 enum GameScene{
 	Start,
@@ -20,7 +20,8 @@ var currentGameScene = GameScene.Start
 # Node functions
 #
 func _ready():
-	_load_scene(GameScene.MainMenu)
+	#_load_scene(GameScene.MainMenu)
+	pass
 
 
 
