@@ -93,19 +93,7 @@ func get_player_name():
 
 func begin_game():
 	assert(get_tree().is_network_server())
-
-	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
-	var spawn_points = {}
-	spawn_points[1] = 0 # Server in spawn point 0.
-	var spawn_point_idx = 1
-	for p in players:
-		spawn_points[p] = spawn_point_idx
-		spawn_point_idx += 1
-	# Call to pre-start game with the spawn points.
-	for p in networkController.players:
-		rpc_id(p, "gameController.pre_start_game", spawn_points)
-
-	gameController.pre_start_game(spawn_points)
+	gameController.launch_game()
 
 
 func end_game():

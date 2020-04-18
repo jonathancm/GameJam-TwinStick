@@ -1,6 +1,24 @@
 extends Node
 
 
+remote func launch_game():
+	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
+	var spawn_points = {}
+	spawn_points[1] = 0 # Server in spawn point 0.
+	var spawn_point_idx = 1
+	for p in networkController.players:
+		spawn_points[p] = spawn_point_idx
+		spawn_point_idx += 1
+
+	# Call to pre-start game with the spawn points.
+	for p in networkController.players:
+		rpc_id(p, "pre_start_game", spawn_points)
+
+	pre_start_game(spawn_points)
+
+
+
+
 remote func pre_start_game(spawn_points):
 	# Change scene.
 	var world = load("res://Scenes/Prototype0.tscn").instance()
