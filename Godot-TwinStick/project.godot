@@ -16,8 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="GameJam-TwinStick"
-run/main_scene="res://InteractionSystem/InteractionScene.tscn"
+run/main_scene="res://Scenes/Lobby.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+sceneLoader="*res://Scripts/SceneLoader.gd"
+networkController="*res://Scripts/NetworkController.gd"
 
 [rendering]
 
