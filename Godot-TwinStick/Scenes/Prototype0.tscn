@@ -35,3 +35,6 @@ material/0 = ExtResource( 1 )
 transform = Transform( 0.5, 0, 0, 0, -8.14603e-08, -0.5, 0, 0.5, -8.14603e-08, 0, 0.75, 0 )
 mesh = SubResource( 2 )
 material/0 = null
+
+[node name="Camera" type="Camera" parent="DynamicEnvironment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4 )

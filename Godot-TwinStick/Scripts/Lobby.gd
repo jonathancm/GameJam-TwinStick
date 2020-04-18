@@ -9,41 +9,41 @@ func _ready():
 	networkController.connect("game_error", self, "_on_game_error")
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
-		$Connect/Name.text = OS.get_environment("USERNAME")
+		$Connect/VBox1/Name.text = OS.get_environment("USERNAME")
 	else:
 		var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
-		$Connect/Name.text = desktop_path[desktop_path.size() - 2]
+		$Connect/VBox1/Name.text = desktop_path[desktop_path.size() - 2]
 
 
 func _on_host_pressed():
-	if $Connect/Name.text == "":
-		$Connect/ErrorLabel.text = "Invalid name!"
+	if $Connect/VBox1/Name.text == "":
+		$Connect/VBox1/ErrorLabel.text = "Invalid name!"
 		return
 
 	$Connect.hide()
 	$Players.show()
-	$Connect/ErrorLabel.text = ""
+	$Connect/VBox1/ErrorLabel.text = ""
 
-	var player_name = $Connect/Name.text
+	var player_name = $Connect/VBox1/Name.text
 	networkController.host_game(player_name)
 	refresh_lobby()
 
 
 func _on_join_pressed():
-	if $Connect/Name.text == "":
-		$Connect/ErrorLabel.text = "Invalid name!"
+	if $Connect/VBox1/Name.text == "":
+		$Connect/VBox1/ErrorLabel.text = "Invalid name!"
 		return
 
-	var ip = $Connect/IPAddress.text
+	var ip = $Connect/VBox1/IPAddress.text
 	if not ip.is_valid_ip_address():
-		$Connect/ErrorLabel.text = "Invalid IP address!"
+		$Connect/VBox1/ErrorLabel.text = "Invalid IP address!"
 		return
 
-	$Connect/ErrorLabel.text = ""
-	$Connect/Host.disabled = true
-	$Connect/Join.disabled = true
+	$Connect/VBox1/ErrorLabel.text = ""
+	$Connect/VBox1/HBox1/Host.disabled = true
+	$Connect/VBox1/HBox1/Join.disabled = true
 
-	var player_name = $Connect/Name.text
+	var player_name = $Connect/VBox1/Name.text
 	networkController.join_game(ip, player_name)
 
 
@@ -53,24 +53,24 @@ func _on_connection_success():
 
 
 func _on_connection_failed():
-	$Connect/Host.disabled = false
-	$Connect/Join.disabled = false
-	$Connect/ErrorLabel.set_text("Connection failed.")
+	$Connect/VBox1/HBox1/Host.disabled = false
+	$Connect/VBox1/HBox1/Join.disabled = false
+	$Connect/VBox1/ErrorLabel.set_text("Connection failed.")
 
 
 func _on_game_ended():
 	show()
 	$Connect.show()
 	$Players.hide()
-	$Connect/Host.disabled = false
-	$Connect/Join.disabled = false
+	$Connect/VBox1/HBox1/Host.disabled = false
+	$Connect/VBox1/HBox1/Join.disabled = false
 
 
 func _on_game_error(errtxt):
 	$ErrorDialog.dialog_text = errtxt
 	$ErrorDialog.popup_centered_minsize()
-	$Connect/Host.disabled = false
-	$Connect/Join.disabled = false
+	$Connect/VBox1/HBox1/Host.disabled = false
+	$Connect/VBox1/HBox1/Join.disabled = false
 
 
 func refresh_lobby():

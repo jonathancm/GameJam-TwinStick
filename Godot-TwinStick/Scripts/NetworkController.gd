@@ -28,7 +28,7 @@ func _player_connected(id):
 
 # Callback from SceneTree.
 func _player_disconnected(id):
-	if has_node("/root/World"): # Game is in progress.
+	if has_node("/root/Protoype0"): # Game is in progress.
 		if get_tree().is_network_server():
 			emit_signal("game_error", "Player " + players[id] + " disconnected")
 			end_game()
@@ -71,40 +71,40 @@ func unregister_player(id):
 
 remote func pre_start_game(spawn_points):
 	# Change scene.
-	var world = load("res://world.tscn").instance()
-	get_tree().get_root().add_child(world)
+	var gameScene = load("res://Scenes/Prototype0.tscn").instance()
+	get_tree().get_root().add_child(gameScene)
 
 	get_tree().get_root().get_node("Lobby").hide()
 
-	var player_scene = load("res://player.tscn")
-
-	for p_id in spawn_points:
-		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
-		var player = player_scene.instance()
-
-		player.set_name(str(p_id)) # Use unique ID as node name.
-		player.position=spawn_pos
-		player.set_network_master(p_id) #set unique id as master.
-
-		if p_id == get_tree().get_network_unique_id():
-			# If node for this peer id, set name.
-			player.set_player_name(player_name)
-		else:
-			# Otherwise set name from peer.
-			player.set_player_name(players[p_id])
-
-		world.get_node("Players").add_child(player)
-
-	# Set up score.
-	world.get_node("Score").add_player(get_tree().get_network_unique_id(), player_name)
-	for pn in players:
-		world.get_node("Score").add_player(pn, players[pn])
-
-	if not get_tree().is_network_server():
-		# Tell server we are ready to start.
-		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
-	elif players.size() == 0:
-		post_start_game()
+#	var player_scene = load("res://player.tscn")
+#
+#	for p_id in spawn_points:
+#		var spawn_pos = gameScene.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
+#		var player = player_scene.instance()
+#
+#		player.set_name(str(p_id)) # Use unique ID as node name.
+#		player.position=spawn_pos
+#		player.set_network_master(p_id) #set unique id as master.
+#
+#		if p_id == get_tree().get_network_unique_id():
+#			# If node for this peer id, set name.
+#			player.set_player_name(player_name)
+#		else:
+#			# Otherwise set name from peer.
+#			player.set_player_name(players[p_id])
+#
+#		gameScene.get_node("Players").add_child(player)
+#
+#	# Set up score.
+#	gameScene.get_node("Score").add_player(get_tree().get_network_unique_id(), player_name)
+#	for pn in players:
+#		gameScene.get_node("Score").add_player(pn, players[pn])
+#
+#	if not get_tree().is_network_server():
+#		# Tell server we are ready to start.
+#		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
+#	elif players.size() == 0:
+#		post_start_game()
 
 
 remote func post_start_game():
@@ -163,9 +163,9 @@ func begin_game():
 
 
 func end_game():
-	if has_node("/root/World"): # Game is in progress.
+	if has_node("/root/Protoype0"): # Game is in progress.
 		# End it
-		get_node("/root/World").queue_free()
+		get_node("/root/Protoype0").queue_free()
 
 	emit_signal("game_ended")
 	players.clear()

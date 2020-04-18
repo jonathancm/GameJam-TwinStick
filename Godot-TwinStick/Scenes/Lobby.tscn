@@ -67,7 +67,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Connect"]
+[node name="VBox1" type="VBoxContainer" parent="Connect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -78,14 +78,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Connect/VBoxContainer"]
-margin_right = 460.0
-margin_bottom = 69.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NameLabel" type="Label" parent="Connect/VBoxContainer/VBoxContainer2"]
+[node name="NameLabel" type="Label" parent="Connect/VBox1"]
 margin_right = 42.0
 margin_bottom = 25.0
 rect_min_size = Vector2( 0, 25 )
@@ -97,45 +90,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Connect/VBoxContainer/VBoxContainer2"]
+[node name="Name" type="LineEdit" parent="Connect/VBox1"]
 margin_top = 29.0
 margin_right = 460.0
 margin_bottom = 69.0
-
-[node name="Name" type="LineEdit" parent="Connect/VBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_right = 320.0
-margin_bottom = 40.0
 rect_min_size = Vector2( 320, 40 )
-size_flags_horizontal = 2
+size_flags_horizontal = 3
 size_flags_vertical = 2
 text = "Player1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Host" type="Button" parent="Connect/VBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 340.0
-margin_right = 460.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 120, 40 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Host"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="Connect/VBoxContainer"]
+[node name="IPLabel" type="Label" parent="Connect/VBox1"]
 margin_top = 73.0
-margin_right = 460.0
-margin_bottom = 142.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IPLabel" type="Label" parent="Connect/VBoxContainer/VBoxContainer3"]
 margin_right = 40.0
-margin_bottom = 25.0
+margin_bottom = 98.0
 rect_min_size = Vector2( 40, 25 )
 size_flags_horizontal = 2
 size_flags_vertical = 0
@@ -145,25 +115,57 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Connect/VBoxContainer/VBoxContainer3"]
-margin_top = 29.0
+[node name="IPAddress" type="LineEdit" parent="Connect/VBox1"]
+margin_top = 102.0
 margin_right = 460.0
-margin_bottom = 69.0
-
-[node name="IPAddress" type="LineEdit" parent="Connect/VBoxContainer/VBoxContainer3/HBoxContainer"]
-margin_right = 320.0
-margin_bottom = 40.0
+margin_bottom = 142.0
 rect_min_size = Vector2( 320, 40 )
-size_flags_horizontal = 2
+size_flags_horizontal = 3
 size_flags_vertical = 2
 text = "127.0.0.1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Join" type="Button" parent="Connect/VBoxContainer/VBoxContainer3/HBoxContainer"]
-margin_left = 340.0
+[node name="Magin1" type="MarginContainer" parent="Connect/VBox1"]
+margin_top = 146.0
 margin_right = 460.0
+margin_bottom = 155.0
+size_flags_vertical = 3
+
+[node name="HBox1" type="HBoxContainer" parent="Connect/VBox1"]
+margin_top = 159.0
+margin_right = 460.0
+margin_bottom = 199.0
+
+[node name="Magin2" type="MarginContainer" parent="Connect/VBox1/HBox1"]
+margin_right = 68.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Host" type="Button" parent="Connect/VBox1/HBox1"]
+margin_left = 72.0
+margin_right = 192.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 40 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Host"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Magin3" type="MarginContainer" parent="Connect/VBox1/HBox1"]
+margin_left = 196.0
+margin_right = 264.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Join" type="Button" parent="Connect/VBox1/HBox1"]
+margin_left = 268.0
+margin_right = 388.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 120, 40 )
 size_flags_horizontal = 0
@@ -173,10 +175,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ErrorLabel" type="Label" parent="Connect/VBoxContainer"]
-margin_top = 146.0
+[node name="Magin4" type="MarginContainer" parent="Connect/VBox1/HBox1"]
+margin_left = 392.0
 margin_right = 460.0
-margin_bottom = 186.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ErrorLabel" type="Label" parent="Connect/VBox1"]
+margin_top = 203.0
+margin_right = 460.0
+margin_bottom = 243.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -187,24 +196,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="Connect/VBoxContainer"]
-margin_top = 190.0
+[node name="Magin5" type="MarginContainer" parent="Connect/VBox1"]
+margin_top = 247.0
 margin_right = 460.0
 margin_bottom = 256.0
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Connect/VBoxContainer"]
+[node name="HBox2" type="HBoxContainer" parent="Connect/VBox1"]
 margin_top = 260.0
 margin_right = 460.0
 margin_bottom = 300.0
 
-[node name="MarginContainer3" type="MarginContainer" parent="Connect/VBoxContainer/HBoxContainer"]
+[node name="Magin6" type="MarginContainer" parent="Connect/VBox1/HBox2"]
 margin_right = 166.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="QuitGame" type="Button" parent="Connect/VBoxContainer/HBoxContainer"]
+[node name="QuitGame" type="Button" parent="Connect/VBox1/HBox2"]
 margin_left = 170.0
 margin_right = 290.0
 margin_bottom = 40.0
@@ -217,7 +226,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer2" type="MarginContainer" parent="Connect/VBoxContainer/HBoxContainer"]
+[node name="Magin7" type="MarginContainer" parent="Connect/VBox1/HBox2"]
 margin_left = 294.0
 margin_right = 460.0
 margin_bottom = 40.0
@@ -230,5 +239,5 @@ margin_bottom = 58.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 [connection signal="pressed" from="Players/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Connect/VBoxContainer/VBoxContainer2/HBoxContainer/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Connect/VBoxContainer/VBoxContainer3/HBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Connect/VBox1/HBox1/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Connect/VBox1/HBox1/Join" to="." method="_on_join_pressed"]
