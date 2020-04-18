@@ -6,7 +6,7 @@
 [ext_resource path="res://Prefabs/PineTree_01.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sources/Rock_02.obj" type="ArrayMesh" id=5]
 [ext_resource path="res://Prefabs/Bunch_01.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Guillaume.tres" type="Environment" id=7]
+[ext_resource path="res://Scenes/Guillaume.tres" type="Environment" id=7]
 
 [sub_resource type="QuadMesh" id=1]
 
