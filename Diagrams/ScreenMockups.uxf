@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>12</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>192</x>
+      <y>480</y>
+      <w>396</w>
+      <h>408</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-10
+//----------
+Main Menu Screen
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>324</x>
+      <y>564</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Host Game</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>324</x>
+      <y>636</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Join Game</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>324</x>
+      <y>708</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Options</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>324</x>
+      <y>780</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Quit</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>396</y>
+      <w>276</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;10.0;10.0;160.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>684</x>
+      <y>276</y>
+      <w>396</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-10
+//----------
+Host Game Screen
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>684</x>
+      <y>564</y>
+      <w>396</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-10
+//----------
+Join Game Screen
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>744</x>
+      <y>636</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+IP Address:</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>744</x>
+      <y>708</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Port:</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>876</x>
+      <y>636</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+&lt;Input&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>876</x>
+      <y>708</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+&lt;Input&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>648</y>
+      <w>276</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1068</x>
+      <y>384</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1068</x>
+      <y>696</y>
+      <w>144</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1188</x>
+      <y>276</y>
+      <w>648</w>
+      <h>552</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-10
+//----------
+Main Game Screen
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>720</y>
+      <w>276</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>210.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>684</x>
+      <y>852</y>
+      <w>396</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-10
+//----------
+Options Screen
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>732</x>
+      <y>324</y>
+      <w>300</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-4
+//----------
+*What happens here?*
+- The server starts
+- The client connect to the server
+- The server and the client load the 
+  first level</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>708</y>
+      <w>132</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Main Player
+Health</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>312</y>
+      <w>108</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Player 2
+Health</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>372</y>
+      <w>108</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Player 3
+Health</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>432</y>
+      <w>108</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Player 4
+Health</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1716</x>
+      <y>708</y>
+      <w>108</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+UI</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1680</x>
+      <y>312</y>
+      <w>144</w>
+      <h>132</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-4
+//----------
+Minimap</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>816</x>
+      <y>912</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Video</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>816</x>
+      <y>972</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Audio</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>816</x>
+      <y>1032</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Controls</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>816</x>
+      <y>768</y>
+      <w>120</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>transparency=0
+layer=-5
+valign=center
+halign=center
+//----------
+Join</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
