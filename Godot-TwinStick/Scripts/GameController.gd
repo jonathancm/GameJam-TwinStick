@@ -10,19 +10,19 @@ remote func pre_start_game(spawn_points):
 	var player_scene = load("res://Prefabs/Player.tscn")
 
 	for p_id in spawn_points:
-		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
+		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).translation
 		var player = player_scene.instance()
 
 		player.set_name(str(p_id)) # Use unique ID as node name.
-		player.position=spawn_pos
+		player.translation=spawn_pos
 		player.set_network_master(p_id) #set unique id as master.
 
-		if p_id == get_tree().get_network_unique_id():
-			# If node for this peer id, set name.
-			networkController.player.set_player_name(networkController.player_name)
-		else:
-			# Otherwise set name from peer.
-			player.set_player_name(networkController.players[p_id])
+#		if p_id == get_tree().get_network_unique_id():
+#			# If node for this peer id, set name.
+#			player.set_player_name(networkController.player_name)
+#		else:
+#			# Otherwise set name from peer.
+#			player.set_player_name(networkController.players[p_id])
 
 		world.get_node("Players").add_child(player)
 
