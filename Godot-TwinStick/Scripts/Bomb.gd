@@ -26,9 +26,9 @@ func process_master(dt:float):
 	
 	timeleft -= dt
 	
-	rset("net_timeleft", timeleft)
-	rset("net_position", global_transform.origin)
-	rset("net_rotation", global_transform.basis.get_rotation_quat())
+	rset_unreliable("net_timeleft", timeleft)
+	rset_unreliable("net_position", global_transform.origin)
+	rset_unreliable("net_rotation", global_transform.basis.get_rotation_quat())
 	
 	if(timeleft < 0):
 		set_process(false)
