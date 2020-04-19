@@ -1,33 +1,41 @@
 extends Node
 
 
+remote func launch_game():
+	# Create a dictionary with peer id and respective spawn points, could be improved by randomizing.
+	var spawn_points = {}
+	spawn_points[1] = 0 # Server in spawn point 0.
+	var spawn_point_idx = 1
+	for p in networkController.players:
+		spawn_points[p] = spawn_point_idx
+		spawn_point_idx += 1
+
+	# Call to pre-start game with the spawn points.
+	for p in networkController.players:
+		rpc_id(p, "pre_start_game", spawn_points)
+
+	pre_start_game(spawn_points)
+
+
+
+
 remote func pre_start_game(spawn_points):
-	# Change scene.
-	var world = load("res://Scenes/Prototype0.tscn").instance()
-	get_tree().get_root().add_child(world)
-	get_tree().get_root().get_node("Lobby").hide()
+	
+	
+	var world = sceneLoader.load_scene(sceneLoader.GameScene.ForestMap)
+	var player_scene = load("res://InteractionSystem/Player.tscn")
 
-	var player_scene = load("res://Prefabs/Player.tscn")
-
-	for p_id in spawn_points:
-		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).translation
-		var player = player_scene.instance()
-
-		player.set_name(str(p_id)) # Use unique ID as node name.
-		player.translation=spawn_pos
-		player.set_network_master(p_id) #set unique id as master.
-
-#		if p_id == get_tree().get_network_unique_id():
-#			# If node for this peer id, set name.
-#			player.set_player_name(networkController.player_name)
-#		else:
-#			# Otherwise set name from peer.
-#			player.set_player_name(networkController.players[p_id])
-
-		world.get_node("Players").add_child(player)
+	#for p_id in spawn_points:
+	#	var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).translation
+	#	var player = player_scene.instance()
+	#
+	#	player.set_name(str(p_id)) # Use unique ID as node name.
+	#	player.translation=spawn_pos
+	#	player.set_network_master(p_id) #set unique id as master.
+	#	#TODO: Set player name here
+	#	world.get_node("Players").add_child(player)
 
 	if not get_tree().is_network_server():
-		# Tell server we are ready to start.
 		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
 	elif networkController.players.size() == 0:
 		post_start_game()
