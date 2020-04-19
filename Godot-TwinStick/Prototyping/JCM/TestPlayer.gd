@@ -3,17 +3,13 @@ extends KinematicBody
 onready var left_stick = Vector2.ZERO
 onready var mouse_direction = Vector3.ZERO
 onready var velocity = Vector3.ZERO
+onready var shoot = false
 export var max_speed = 0.5
 export var inertia = 0.5
 export var gravity = 9.8
 
+var bombPrefab = load("res://Prototyping/JCM/Bomb.tscn")
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(dt:float):
 	var direction:Vector3 = mouse_direction
 	direction.y = 0
@@ -31,10 +27,20 @@ func _physics_process(dt:float):
 
 	velocity = move_and_slide(velocity, Vector3.UP)
 
+	if(shoot):
+		var gunSocket = get_node("GunSocket")
+		var instance = bombPrefab.instance()
+		instance.set_global_transform(gunSocket.get_global_transform())
+		get_parent().add_child(instance)
+		var impulseStrength = 2.0
+		var impulseDirection = -gunSocket.get_global_transform().basis.z
+		instance.apply_impulse(Vector3.ZERO, impulseStrength*impulseDirection)
+		instance.apply_torque_impulse (impulseStrength/20.0*Vector3.LEFT)
 
 
 
-func _on_update_controls(left_stick:Vector2, mouse_direction:Vector3):
-	self.mouse_direction = mouse_direction
-	self.left_stick = left_stick
 
+func _on_update_controls(_left_stick:Vector2, _mouse_direction:Vector3, _shoot:bool):
+	mouse_direction = _mouse_direction
+	left_stick = _left_stick
+	shoot = _shoot
