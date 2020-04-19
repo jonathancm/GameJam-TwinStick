@@ -4,7 +4,6 @@
 [ext_resource path="res://Sources/Audio/Explosion.wav" type="AudioStream" id=2]
 
 [sub_resource type="SpatialMaterial" id=1]
-flags_vertex_lighting = true
 flags_ensure_correct_normals = true
 vertex_color_use_as_albedo = true
 
@@ -17,16 +16,15 @@ gravity = Vector3( 0, -40, 0 )
 initial_velocity = 12.0
 scale = 0.5
 scale_random = 1.0
-color = Color( 2.4, 0.64, 0, 1 )
+color = Color( 2, 0.5, 0, 1 )
 hue_variation = 0.02
-hue_variation_random = 1.0
 
 [sub_resource type="CubeMesh" id=3]
 
 [node name="BombExplosion" type="Spatial"]
 
 [node name="Particles" type="Particles" parent="."]
-transform = Transform( 0.338012, 0, 0, 0, 0.338012, 0, 0, 0, 0.338012, 0, 1.4609, 0 )
+transform = Transform( 0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, 0, 0.339459, 0 )
 material_override = SubResource( 1 )
 emitting = false
 amount = 40
@@ -39,7 +37,6 @@ script = ExtResource( 1 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 2 )
-attenuation_model = 1
-unit_db = 2.0
+unit_db = 4.0
 pitch_scale = 0.8
 autoplay = true

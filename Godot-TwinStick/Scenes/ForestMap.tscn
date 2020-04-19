@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/ForestMap/Environment_Forest.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Sources/Audio/sirkoto51__retro-puzzle-music-loop.wav" type="AudioStream" id=2]
 [ext_resource path="res://Scenes/ForestMap/ForestMap.tres" type="Environment" id=7]
 
 [node name="ForestMap" type="Spatial"]
@@ -35,3 +36,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50026, 0, 8.34636 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.322481, 0, -0.0476246 )
 
 [node name="Players" type="Spatial" parent="."]
+
+[node name="Audio" type="Spatial" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource( 2 )
+volume_db = -10.0
+autoplay = true
