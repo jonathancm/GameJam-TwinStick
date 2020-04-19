@@ -4,8 +4,6 @@
 [ext_resource path="res://Materials/White.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=3]
 
-
-
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.219724
 height = 0.234796
@@ -38,3 +36,6 @@ material/0 = ExtResource( 2 )
 transform = Transform( -0.0952053, -0.633908, 9.17004e-09, 0, -2.86865e-08, -0.217186, 0.355311, -0.169855, 2.4571e-09, -0.245437, -2.57266e-08, 1.42546 )
 mesh = SubResource( 3 )
 material/0 = ExtResource( 2 )
+
+[node name="GunSocket" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.420256, -0.444968 )

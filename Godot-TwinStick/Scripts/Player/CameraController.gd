@@ -29,8 +29,9 @@ func _process(delta):
 	var leftStick = GetLeftStick()
 	var mouseDirection = GetMouseDirection()
 	var jump:bool = Input.is_action_pressed("control_jump")
+	var mouseLMB:bool = Input.is_action_just_released("control_shoot")
 	
-	emit_signal("update_controls", leftStick, mouseDirection, jump)
+	emit_signal("update_controls", leftStick, mouseDirection, jump, mouseLMB)
 	
 
 func GetLeftStick() -> Vector2:
