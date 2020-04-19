@@ -3,8 +3,7 @@ extends Node
 enum GameScene{
 	Start,
 	Lobby,
-	MainGame,
-	TestEnviro
+	ForestMap,
    }
 
 #
@@ -22,12 +21,12 @@ func _ready():
 
 
 
-func _load_scene(newSceneID):
-	var newSceneName = _get_scene_name(newSceneID)
+func load_scene(newSceneID):
+	var newSceneName = get_scene_name(newSceneID)
 	if(newSceneName == ""):
 		return
 
-	var oldSceneName = _get_scene_name(currentGameScene)
+	var oldSceneName = get_scene_name(currentGameScene)
 	if(oldSceneName != ""):
 		get_tree().get_root().remove_child(oldSceneName)
 		oldSceneName.call_deferred("free")
@@ -35,17 +34,16 @@ func _load_scene(newSceneID):
 	var newScene = load("res://Scenes/" + newSceneName + ".tscn").instance()
 	get_tree().get_root().get_node("Lobby").hide()
 	get_tree().get_root().add_child(newScene)
+	return newScene
 
 
 
 
-func _get_scene_name(sceneID):
+func get_scene_name(sceneID):
 	match(sceneID):
 		GameScene.Lobby:
 			return ""
-		GameScene.MainGame:
-			return "MainGame"
-		GameScene.TestEnviro:
-			return "TestEnviro"
+		GameScene.ForestMap:
+			return "ForestMap"
 		_:
 			return ""

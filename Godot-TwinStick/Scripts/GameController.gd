@@ -20,8 +20,8 @@ remote func launch_game():
 
 
 remote func pre_start_game(spawn_points):
-	var world = sceneLoader.loadScene(sceneLoader.GameScene.TestEnviro)
-	var player_scene = load("res://Prefabs/Player.tscn")
+	var world = sceneLoader.load_scene(sceneLoader.GameScene.ForestMap)
+	var player_scene = load("res://InteractionSystem/Player.tscn")
 
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).translation
