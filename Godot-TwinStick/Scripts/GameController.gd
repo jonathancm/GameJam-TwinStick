@@ -28,8 +28,8 @@ remote func pre_start_game(spawn_points):
 	
 	
 	var world = sceneLoader.load_scene(sceneLoader.GameScene.ForestMap)
-	var player_prefab = load("res://InteractionSystem/Player.tscn")
-	var camera_prefab = load("res://Prefabs/Camera.tscn")
+	var player_prefab = load("res://Prefabs/Player/Player.tscn")
+	var camera_prefab = load("res://Prefabs/Player/Camera.tscn")
 
 	for p_id in spawn_points:
 		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).translation

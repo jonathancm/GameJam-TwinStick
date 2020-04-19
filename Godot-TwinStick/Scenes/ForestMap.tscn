@@ -1,12 +1,13 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Prefabs/PineTree_01.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Prefabs/Box_A.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Prefabs/Rock_C.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Prefabs/Bunch_01.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Prefabs/Rock_B.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Prefabs/Static/PineTree_01.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Static/Box_A.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prefabs/Static/Rock_C.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/Static/Bunch_01.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prefabs/Static/Rock_B.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/ForestMap.tres" type="Environment" id=7]
 [ext_resource path="res://Materials/M_Ground.tres" type="Material" id=9]
+
 
 [sub_resource type="QuadMesh" id=1]
 
