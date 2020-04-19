@@ -10,6 +10,8 @@ onready var mouse_direction = Vector3.ZERO
 onready var jump = false
 onready var shoot = false
 onready var velocity = Vector3.ZERO
+onready var view_normal:Node
+onready var view_ghost:Node
 
 export var id = -1
 export var max_speed = 0.5
@@ -17,6 +19,8 @@ export var jump_velocity = 10.0
 export var inertia = 0.5
 export var gravity = 9.8
 export(Resource) var bomb_prefab
+export(NodePath) var view_normal_path
+export(NodePath) var view_ghost_path
 
 puppet var net_position:Vector3
 puppet var net_rotation:Quat
@@ -28,7 +32,14 @@ var bombID = 0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	view_normal = get_node(view_normal_path)
+	view_ghost = get_node(view_ghost_path)
+	
+	view_ghost.visible = false
+	view_normal.visible = true
+	
+	
+	
 
 func _physics_process(dt:float):
 
@@ -108,6 +119,9 @@ func _on_update_controls(_left_stick:Vector2, _mouse_direction:Vector3, _jump:bo
 
 remotesync func rpc_set_alive(var _is_alive):
 	isAlive = _is_alive
+	
+	view_normal.visible = isAlive
+	view_ghost.visible = !isAlive
 	emit_signal("state_change", self)
 	
 
