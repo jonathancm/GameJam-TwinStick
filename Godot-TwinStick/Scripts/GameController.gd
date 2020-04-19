@@ -20,18 +20,20 @@ remote func launch_game():
 
 
 remote func pre_start_game(spawn_points):
+	
+	
 	var world = sceneLoader.load_scene(sceneLoader.GameScene.ForestMap)
 	var player_scene = load("res://InteractionSystem/Player.tscn")
 
-	for p_id in spawn_points:
-		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).translation
-		var player = player_scene.instance()
-
-		player.set_name(str(p_id)) # Use unique ID as node name.
-		player.translation=spawn_pos
-		player.set_network_master(p_id) #set unique id as master.
-		#TODO: Set player name here
-		world.get_node("Players").add_child(player)
+	#for p_id in spawn_points:
+	#	var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).translation
+	#	var player = player_scene.instance()
+	#
+	#	player.set_name(str(p_id)) # Use unique ID as node name.
+	#	player.translation=spawn_pos
+	#	player.set_network_master(p_id) #set unique id as master.
+	#	#TODO: Set player name here
+	#	world.get_node("Players").add_child(player)
 
 	if not get_tree().is_network_server():
 		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())

@@ -21,9 +21,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
+gameController="*res://Scripts/GameController.gd"
 networkController="*res://Scripts/NetworkController.gd"
 sceneLoader="*res://Scripts/SceneLoader.gd"
-gameController="*res://Scripts/GameController.gd"
 
 [input]
 
@@ -45,6 +45,11 @@ control_left={
 control_right={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":68,"unicode":0,"echo":false,"script":null)
+ ]
+}
+control_jump={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
 
