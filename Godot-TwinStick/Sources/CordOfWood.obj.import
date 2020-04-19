@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/CordOfWood.obj-6ff1a75898c79679e69cda0bed080fbc.mesh"
+
+[deps]
+
+files=[ "res://.import/CordOfWood.obj-6ff1a75898c79679e69cda0bed080fbc.mesh" ]
+
+source_file="res://Sources/CordOfWood.obj"
+dest_files=[ "res://.import/CordOfWood.obj-6ff1a75898c79679e69cda0bed080fbc.mesh", "res://.import/CordOfWood.obj-6ff1a75898c79679e69cda0bed080fbc.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

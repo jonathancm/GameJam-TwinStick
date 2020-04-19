@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Prefabs/Static/PineTree_01.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prefabs/Static/Box_A.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/CordOfWood.tscn" type="PackedScene" id=3]
+
 
 
 [node name="Bunch" type="Spatial"]
@@ -17,3 +19,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.730899, 2.70162e-07, -0.5206
 
 [node name="Box_A" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.884117, 0, -0.467266, 0, 1, 0, 0.467266, 0, 0.884117, -0.580881, 0, -0.13299 )
+
+[node name="CordOfWood" parent="." instance=ExtResource( 3 )]
+transform = Transform( 0.819412, 0, -0.573205, 0, 1, 0, 0.573205, 0, 0.819412, 1.15408, 0, 0.347413 )
