@@ -1,9 +1,8 @@
 extends KinematicBody
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
+signal state_change(player)
 
 onready var isAlive = true
 onready var left_stick = Vector2.ZERO
@@ -12,6 +11,7 @@ onready var jump = false
 onready var shoot = false
 onready var velocity = Vector3.ZERO
 
+export var id = -1
 export var max_speed = 0.5
 export var jump_velocity = 10.0
 export var inertia = 0.5
@@ -106,21 +106,23 @@ func _on_update_controls(_left_stick:Vector2, _mouse_direction:Vector3, _jump:bo
 
 
 
-remotesync func rpc_respawn():
-	isAlive = true
+remotesync func rpc_set_alive(var _is_alive):
+	isAlive = _is_alive
+	emit_signal("state_change", self)
+	
 
 
 
 
 master func rpc_take_damage(_amount:float):
 	if(isAlive && _amount > 0):
-		rpc_player_death()
+		rpc("rpc_set_alive", false)
 
 
+master func rpc_respawn(_position:Vector3):
+	global_transform.origin = _position
+	rpc("rpc_set_alive", true)
 
-
-remotesync func rpc_player_death():
-	isAlive = false
 
 
 
