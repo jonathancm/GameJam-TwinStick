@@ -71,11 +71,12 @@ master func _physics_process_master(dt:float):
 	if(shoot):
 		bombID += 1
 		var gunSocket = get_node("GunSocket")
-		var transform = gunSocket.get_global_transform()
+		var transform1 = gunSocket.get_global_transform()
+		var transform2 = gunSocket.get_global_transform()
 		var bombName = "Bomb" + "_" + get_name() + "_" + str(bombID)
-		spawn_bomb(bombName, transform)
-		for p in networkController.players:
-			rpc_id(p, "spawn_bomb", bombName, transform)
+		transform2.origin += Vector3(0,2,0)
+		spawn_bomb(bombName, transform1)
+		rpc("spawn_bomb", bombName, transform2)
 
 
 
