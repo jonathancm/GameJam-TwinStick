@@ -5,9 +5,12 @@ puppet var net_position:Vector3
 puppet var net_rotation:Quat
 puppet var net_timeleft:float
 
+var exploded:bool
+
 export(NodePath) var explosionArea
 export var timeleft:float = 5.0
 export var damage:float = 1.0
+export(Resource) var explosion_prefab
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,8 +34,12 @@ func process_master(dt:float):
 	rset_unreliable("net_rotation", global_transform.basis.get_rotation_quat())
 
 	if(timeleft < 0):
-		set_process(false)
+		var instance = explosion_prefab.instance()
+		instance.set_name("bomb_explosion")
+		instance.global_transform.origin = global_transform.origin
+		get_parent().add_child(instance)
 		deal_area_damage()
+		set_process(false)
 		rpc("net_explode_and_destroy")
 
 

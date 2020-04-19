@@ -1,27 +1,35 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Bomb.gd" type="Script" id=1]
+[ext_resource path="res://Prefabs/BombVisual.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/BombExplosion.tscn" type="PackedScene" id=3]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.1, 0.1, 0.1 )
+[sub_resource type="SphereShape" id=4]
+radius = 0.27983
 
-[sub_resource type="SphereShape" id=3]
+[sub_resource type="SphereShape" id=2]
 
-[sub_resource type="PrismMesh" id=2]
+[sub_resource type="PrismMesh" id=3]
 size = Vector3( 0.2, 0.2, 0.2 )
 
 [node name="Bomb" type="RigidBody"]
+transform = Transform( 0.533592, 0, 0, 0, 0.533592, 0, 0, 0, 0.533592, 0, 0, 0 )
 script = ExtResource( 1 )
 explosionArea = NodePath("ExplosionArea")
+timeleft = 1.0
+explosion_prefab = ExtResource( 3 )
 
 [node name="RigidBodyShape" type="CollisionShape" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="ExplosionArea" type="Area" parent="."]
 
 [node name="ExplosionShape" type="CollisionShape" parent="ExplosionArea"]
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="BombMesh" type="MeshInstance" parent="."]
-mesh = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
+
+[node name="BombVisual" parent="BombMesh" instance=ExtResource( 2 )]
+transform = Transform( 0.278107, 0, 0, 0, 0.278107, 0, 0, 0, 0.278107, 0, 0, 0 )
