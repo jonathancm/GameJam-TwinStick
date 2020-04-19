@@ -15,8 +15,8 @@ func _process(delta):
 	_process_camera_position(delta)
 	var leftStick = GetLeftStick()
 	var mouseDirection = GetMouseDirection()
-	#var mouseLMB = Input.is_action_just_pressed()
-	emit_signal("update_controls", leftStick, mouseDirection)
+	var mouseLMB = Input.is_action_just_released("control_shoot")
+	emit_signal("update_controls", leftStick, mouseDirection, mouseLMB)
 
 
 func GetLeftStick() -> Vector2:
