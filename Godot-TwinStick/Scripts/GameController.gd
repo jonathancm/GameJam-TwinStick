@@ -9,40 +9,40 @@ var respawning = false
 var spawn_positions = {}
 
 func _on_player_state_change(player):
-	
+
 	if(respawning):
 		return
-	
+
 	players[player.id] = player
-	
+
 	if(end_condition()):
 		print("A player has won! But I don't know who!")
 		respawning = true
 		yield(get_tree().create_timer(5.0), "timeout")
-		
+
 		print("Restarting Game...")
 		for player in players.values():
 			player.rpc("rpc_respawn", spawn_positions[player.id])
-			
-		
+
+
 		respawning = false
-		
-	
+
+
 func end_condition():
 	var totalPlayers = len(players.keys())
-	
+
 	var playersAlive = 0
 	for player in players.values():
 		playersAlive += 1 if player.isAlive else 0
-	
+
 	if(totalPlayers == 1 and playersAlive < 1):
 		return true
-		
+
 	if(playersAlive <= 1):
 		return true
-		
+
 	return false
-		
+
 	#var totalAlive = sum(1 for alive in values)
 
 
@@ -67,7 +67,7 @@ remote func launch_game():
 remote func pre_start_game(spawn_points):
 
 	var isHost:bool = is_network_master()
-	
+
 	var sceneTree:MultiplayerAPI = get_tree().multiplayer
 
 	var myId:int = sceneTree.get_network_unique_id()
@@ -88,7 +88,7 @@ remote func pre_start_game(spawn_points):
 		spawn_positions[player.id] = spawn_pos
 		#TODO: Set player name here
 		world.get_node("Players").add_child(player)
-		
+
 		if(isHost):
 			player.connect("state_change", self, "_on_player_state_change")
 			players[player.id] = player

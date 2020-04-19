@@ -16,12 +16,14 @@ export var max_speed = 0.5
 export var jump_velocity = 10.0
 export var inertia = 0.5
 export var gravity = 9.8
+export var bombCooldown = 1.0
 export(Resource) var bomb_prefab
 
 puppet var net_position:Vector3
 puppet var net_rotation:Quat
 
-var bombID = 0;
+onready var bombID = 0;
+onready var currentCooldown = bombCooldown;
 
 
 
@@ -29,6 +31,28 @@ var bombID = 0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
+
+func _process(delta):
+	if(is_network_master() == false):
+		return
+
+	if(isAlive == false):
+		return
+
+	currentCooldown -= delta
+	if(currentCooldown <= 0):
+		currentCooldown = 0
+
+	if(shoot and currentCooldown == 0):
+		currentCooldown = bombCooldown
+		bombID += 1
+		var gunSocket = get_node("GunSocket")
+		var transform = gunSocket.get_global_transform()
+		var bombName = "Bomb" + "_" + get_name() + "_" + str(bombID)
+		rpc("spawn_bomb", bombName, transform)
+
+
+
 
 func _physics_process(dt:float):
 
@@ -69,22 +93,11 @@ master func _physics_process_master(dt:float):
 	rset("net_rotation", global_transform.basis.get_rotation_quat())
 
 
-	if(isAlive && shoot):
-		bombID += 1
-		var gunSocket = get_node("GunSocket")
-		var transform1 = gunSocket.get_global_transform()
-		var transform2 = gunSocket.get_global_transform()
-		var bombName = "Bomb" + "_" + get_name() + "_" + str(bombID)
-		transform2.origin += Vector3(0,2,0)
-		spawn_bomb(bombName, transform1)
-		rpc("spawn_bomb", bombName, transform2)
 
 
 
 
-
-
-remote func spawn_bomb(name:String, transform:Transform):
+remotesync func spawn_bomb(name:String, transform:Transform):
 	var impulseStrength = 2.0
 	var impulseDirection = -transform.basis.z
 	var instance = bomb_prefab.instance()
@@ -109,7 +122,7 @@ func _on_update_controls(_left_stick:Vector2, _mouse_direction:Vector3, _jump:bo
 remotesync func rpc_set_alive(var _is_alive):
 	isAlive = _is_alive
 	emit_signal("state_change", self)
-	
+
 
 
 
