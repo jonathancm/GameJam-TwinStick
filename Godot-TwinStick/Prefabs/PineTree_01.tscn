@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Sources/PineTree.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Materials/M_TreeBark.tres" type="Material" id=2]
 
 [sub_resource type="CylinderShape" id=1]
 radius = 0.492136
@@ -9,7 +10,7 @@ radius = 0.492136
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = ExtResource( 1 )
-material/0 = null
+material/0 = ExtResource( 2 )
 material/1 = null
 
 [node name="StaticBody" type="StaticBody" parent="."]
