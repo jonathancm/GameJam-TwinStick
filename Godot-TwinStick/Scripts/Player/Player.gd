@@ -18,7 +18,8 @@ export var max_speed = 0.5
 export var jump_velocity = 10.0
 export var inertia = 0.5
 export var gravity = 9.8
-export var bombCooldown = 1.0
+export var summoningSickness = 1.0
+export var bombCooldown = 0.250
 export(Resource) var bomb_prefab
 export(NodePath) var view_normal_path
 export(NodePath) var view_ghost_path
@@ -27,7 +28,7 @@ puppet var net_position:Vector3
 puppet var net_rotation:Quat
 
 onready var bombID = 0;
-onready var currentCooldown = bombCooldown;
+onready var currentCooldown = summoningSickness;
 
 
 
