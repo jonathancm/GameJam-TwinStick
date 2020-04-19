@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://InteractionSystem/CameraController.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/CameraController.gd" type="Script" id=1]
+
 
 [node name="Camera" type="Camera"]
 transform = Transform( 0.707107, -0.612373, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 0, 3.04532, 0 )
