@@ -1,6 +1,6 @@
 extends Camera
 
-signal update_controls
+signal update_controls(leftStick, mouseDirection, jump)
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -24,8 +24,9 @@ func _process(delta):
 	
 	var leftStick = GetLeftStick()
 	var mouseDirection = GetMouseDirection()
+	var jump:bool = Input.is_action_pressed("control_jump")
 	
-	emit_signal("update_controls", leftStick, mouseDirection)
+	emit_signal("update_controls", leftStick, mouseDirection, jump)
 	
 
 func GetLeftStick() -> Vector2:

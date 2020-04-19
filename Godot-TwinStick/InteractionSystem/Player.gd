@@ -7,10 +7,14 @@ extends KinematicBody
 
 onready var left_stick = Vector2.ZERO
 onready var mouse_direction = Vector3.ZERO
+onready var jump = false
 onready var velocity = Vector3.ZERO
+
 export var max_speed = 0.5
+export var jump_velocity = 10.0
 export var inertia = 0.5
 export var gravity = 9.8
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -36,12 +40,16 @@ func _physics_process(dt:float):
 					
 	velocity.y -= gravity*dt
 	
+	if(is_on_floor() && jump):
+		velocity.y = jump_velocity
+	
 	velocity = move_and_slide(velocity, Vector3.UP)
 	
 	
 
 
-func _on_update_controls(left_stick:Vector2, mouse_direction:Vector3):
+func _on_update_controls(left_stick:Vector2, mouse_direction:Vector3, jump:bool):
 	self.mouse_direction = mouse_direction
 	self.left_stick = left_stick
+	self.jump = jump
 	
