@@ -1,4 +1,5 @@
 extends Button
 
-func _on_BTNQuit_pressed():
+
+func _on_QuitGame_pressed():
 	get_tree().quit()

@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 gameController="*res://Scripts/GameController.gd"
 networkController="*res://Scripts/NetworkController.gd"
 sceneLoader="*res://Scripts/SceneLoader.gd"
+Credits="*res://Prefabs/Credits.tscn"
 
 [input]
 
