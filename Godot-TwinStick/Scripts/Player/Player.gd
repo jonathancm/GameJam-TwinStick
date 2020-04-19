@@ -15,12 +15,12 @@ export var max_speed = 0.5
 export var jump_velocity = 10.0
 export var inertia = 0.5
 export var gravity = 9.8
+export(Resource) var bomb_prefab
 
 puppet var net_position:Vector3
 puppet var net_rotation:Quat
 
 
-var bombPrefab = load("res://Prototyping/JCM/Bomb.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -68,7 +68,7 @@ master func _physics_process_master(dt:float):
 	
 	if(shoot):
 		var gunSocket = get_node("GunSocket")
-		var instance = bombPrefab.instance()
+		var instance = bomb_prefab.instance()
 		instance.set_global_transform(gunSocket.get_global_transform())
 		get_parent().add_child(instance)
 		var impulseStrength = 2.0
