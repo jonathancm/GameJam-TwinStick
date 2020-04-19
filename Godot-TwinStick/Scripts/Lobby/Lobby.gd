@@ -1,12 +1,12 @@
 extends Control
 
 func _ready():
-	# Called every time the node is added to the scene.
-	networkController.connect("connection_failed", self, "_on_connection_failed")
-	networkController.connect("connection_succeeded", self, "_on_connection_success")
-	networkController.connect("player_list_changed", self, "refresh_lobby")
-	networkController.connect("game_ended", self, "_on_game_ended")
-	networkController.connect("game_error", self, "_on_game_error")
+	var _error = 0;
+	_error = networkController.connect("connection_failed", self, "_on_connection_failed")
+	_error = networkController.connect("connection_succeeded", self, "_on_connection_success")
+	_error = networkController.connect("player_list_changed", self, "refresh_lobby")
+	_error = networkController.connect("game_ended", self, "_on_game_ended")
+	_error = networkController.connect("game_error", self, "_on_game_error")
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
 		$Connect/VBox1/Name.text = OS.get_environment("USERNAME")

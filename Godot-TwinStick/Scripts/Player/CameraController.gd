@@ -12,9 +12,9 @@ var target:Spatial = null
 var lookPosition = Vector3.ZERO
 
 
-func set_target(target:Spatial):
-	self.target = target
-	self.lookPosition = target.global_transform.origin
+func set_target(_target:Spatial):
+	self.target = _target
+	self.lookPosition = _target.global_transform.origin
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
