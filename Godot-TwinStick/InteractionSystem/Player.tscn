@@ -15,6 +15,7 @@ height = 0.234796
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 3 )
 max_speed = 5.0
+jump_velocity = 5.0
 inertia = 0.1
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
