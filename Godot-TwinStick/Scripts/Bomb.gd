@@ -34,11 +34,6 @@ func process_master(dt:float):
 	rset_unreliable("net_rotation", global_transform.basis.get_rotation_quat())
 
 	if(timeleft < 0):
-		var instance = explosion_prefab.instance()
-		instance.set_name("bomb_explosion")
-		instance.global_transform.origin = global_transform.origin
-		get_parent().add_child(instance)
-		deal_area_damage()
 		set_process(false)
 		rpc("net_explode_and_destroy")
 
@@ -55,4 +50,17 @@ func deal_area_damage():
 
 
 remotesync func net_explode_and_destroy():
+	var instance = explosion_prefab.instance()
+	instance.set_name("bomb_explosion")
+	instance.global_transform.origin = global_transform.origin
+	get_parent().add_child(instance)
+	deal_area_damage()
 	queue_free()
+	
+master func rpc_take_damage(damage:float):
+	
+	if(damage <= 0):
+		return
+	
+	if(timeleft > 0):
+		timeleft = 0.1
