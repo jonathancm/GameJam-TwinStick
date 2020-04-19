@@ -36,12 +36,12 @@ onready var currentCooldown = bombCooldown;
 func _ready():
 	view_normal = get_node(view_normal_path)
 	view_ghost = get_node(view_ghost_path)
-	
+
 	view_ghost.visible = false
 	view_normal.visible = true
-	
-	
-	
+
+
+
 
 func _process(delta):
 	if(is_network_master() == false):
@@ -132,7 +132,7 @@ func _on_update_controls(_left_stick:Vector2, _mouse_direction:Vector3, _jump:bo
 
 remotesync func rpc_set_alive(var _is_alive):
 	isAlive = _is_alive
-	
+
 	view_normal.visible = isAlive
 	view_ghost.visible = !isAlive
 	emit_signal("state_change", self)
