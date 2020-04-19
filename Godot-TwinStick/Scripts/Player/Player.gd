@@ -5,6 +5,7 @@ extends KinematicBody
 # var a = 2
 # var b = "text"
 
+onready var isAlive = true
 onready var left_stick = Vector2.ZERO
 onready var mouse_direction = Vector3.ZERO
 onready var jump = false
@@ -68,7 +69,7 @@ master func _physics_process_master(dt:float):
 	rset("net_rotation", global_transform.basis.get_rotation_quat())
 
 
-	if(shoot):
+	if(isAlive && shoot):
 		bombID += 1
 		var gunSocket = get_node("GunSocket")
 		var transform1 = gunSocket.get_global_transform()
@@ -102,4 +103,24 @@ func _on_update_controls(_left_stick:Vector2, _mouse_direction:Vector3, _jump:bo
 	left_stick = _left_stick
 	jump = _jump
 	shoot = _shoot
+
+
+
+remotesync func rpc_respawn():
+	isAlive = true
+
+
+
+
+master func rpc_take_damage(_amount:float):
+	if(isAlive && _amount > 0):
+		rpc_player_death()
+
+
+
+
+remotesync func rpc_player_death():
+	isAlive = false
+
+
 

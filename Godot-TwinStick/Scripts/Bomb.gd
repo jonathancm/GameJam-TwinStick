@@ -20,25 +20,25 @@ func _process(dt):
 		process_master(dt)
 	else:
 		process_puppet()
-	
-	
+
+
 func process_master(dt:float):
-	
+
 	timeleft -= dt
-	
+
 	rset_unreliable("net_timeleft", timeleft)
 	rset_unreliable("net_position", global_transform.origin)
 	rset_unreliable("net_rotation", global_transform.basis.get_rotation_quat())
-	
+
 	if(timeleft < 0):
 		set_process(false)
 		rpc("net_destroy")
-		
-	
+
+
 func process_puppet():
 	global_transform = Transform(Basis(net_rotation), net_position)
-	
+
 remotesync func net_destroy():
 	queue_free()
-	
-	
+
+
