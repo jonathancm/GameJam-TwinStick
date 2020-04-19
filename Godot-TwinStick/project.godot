@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="GameJam-TwinStick"
+config/name="Super Bomber Blast"
 run/main_scene="res://Scenes/Lobby.tscn"
 config/icon="res://icon.png"
 
