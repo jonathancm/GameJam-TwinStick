@@ -15,21 +15,35 @@ export var jump_velocity = 10.0
 export var inertia = 0.5
 export var gravity = 9.8
 
+puppet var net_position:Vector3
+puppet var net_rotation:Quat
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
+func _physics_process(dt:float):
+	
+	if(is_network_master()):
+		_physics_process_master(dt)
+		return
+		
+	global_transform = Transform(Basis(net_rotation), net_position)
+	
+	
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(dt:float):
+master func _physics_process_master(dt:float):
 	
 	
 	var direction:Vector3 = mouse_direction
 	direction.y = 0
 	
-	transform = transform.looking_at(global_transform.origin + direction, Vector3.UP)
+	if(direction.length() > 0.1):
+		transform = transform.looking_at(global_transform.origin + direction, Vector3.UP)
 	
 	
 	var targetVelocity = max_speed * left_stick.normalized()
@@ -44,6 +58,9 @@ func _physics_process(dt:float):
 		velocity.y = jump_velocity
 	
 	velocity = move_and_slide(velocity, Vector3.UP)
+	
+	rset("net_position", global_transform.origin)
+	rset("net_rotation", global_transform.basis.get_rotation_quat())
 	
 	
 

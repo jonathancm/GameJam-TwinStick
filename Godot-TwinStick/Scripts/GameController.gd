@@ -22,18 +22,34 @@ remote func launch_game():
 remote func pre_start_game(spawn_points):
 	
 	
+	var sceneTree:MultiplayerAPI = get_tree().multiplayer
+	
+	var myId:int = sceneTree.get_network_unique_id()
+	
+	
 	var world = sceneLoader.load_scene(sceneLoader.GameScene.ForestMap)
-	var player_scene = load("res://InteractionSystem/Player.tscn")
+	var player_prefab = load("res://Prefabs/Player/Player.tscn")
+	var camera_prefab = load("res://Prefabs/Player/Camera.tscn")
 
-	#for p_id in spawn_points:
-	#	var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).translation
-	#	var player = player_scene.instance()
-	#
-	#	player.set_name(str(p_id)) # Use unique ID as node name.
-	#	player.translation=spawn_pos
-	#	player.set_network_master(p_id) #set unique id as master.
-	#	#TODO: Set player name here
-	#	world.get_node("Players").add_child(player)
+	for p_id in spawn_points:
+		var spawn_pos = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).translation
+		
+		var player = player_prefab.instance()
+		player.set_name(str(p_id)) # Use unique ID as node name.
+		player.translation=spawn_pos
+		player.set_network_master(p_id) #set unique id as master.
+		#TODO: Set player name here
+		world.get_node("Players").add_child(player)
+		
+		if(myId != p_id):
+			continue
+		
+		print("Init Camera")
+		var camera = camera_prefab.instance()
+		world.add_child(camera)
+		camera.connect("update_controls", player, "_on_update_controls")
+		camera.set_target(player)
+		
 
 	if not get_tree().is_network_server():
 		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())

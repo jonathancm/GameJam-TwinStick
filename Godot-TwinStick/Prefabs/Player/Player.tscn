@@ -2,7 +2,9 @@
 
 [ext_resource path="res://Materials/Black.tres" type="Material" id=1]
 [ext_resource path="res://Materials/White.tres" type="Material" id=2]
-[ext_resource path="res://InteractionSystem/Player.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=3]
+
+
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.219724
@@ -15,6 +17,7 @@ height = 0.234796
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 3 )
 max_speed = 5.0
+jump_velocity = 5.0
 inertia = 0.1
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
