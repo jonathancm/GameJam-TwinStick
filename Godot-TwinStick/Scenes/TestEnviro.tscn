@@ -125,7 +125,7 @@ transform = Transform( 0.826796, 0, -0.562502, 0, 1, 0, 0.562502, 0, 0.826796, 0
 transform = Transform( -0.485481, 0, -0.874247, 0, 1, 0, 0.874247, 0, -0.485481, -6.24016, -0.0155855, -2.18305 )
 
 [node name="Rock_C" parent="Environment/Rocks" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.184987, 0, -0.358224 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.497448, -0.0486458, -0.539641 )
 
 [node name="Rock_C8" parent="Environment/Rocks" instance=ExtResource( 2 )]
 transform = Transform( 0.432432, -0.901667, 0, 0.901667, 0.432432, 0, 0, 0, 1, 8.78347, -0.0330634, -3.20278 )
@@ -438,5 +438,5 @@ shadow_enabled = true
 shadow_bias = 0.0
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.707107, -0.612373, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 0, 3.04532, 0 )
+transform = Transform( 0.707107, -0.662167, 0.248061, 0, 0.350812, 0.936446, -0.707107, -0.662167, 0.248061, 0, 3.04532, 0 )
 script = ExtResource( 8 )
