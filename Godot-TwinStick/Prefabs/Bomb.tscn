@@ -1,8 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Scripts/Bomb.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Bombs/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/BombVisual.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/BombExplosion.tscn" type="PackedScene" id=3]
+
+
+
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.27983

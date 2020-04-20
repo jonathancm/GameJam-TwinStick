@@ -6,6 +6,8 @@
 [ext_resource path="res://Prefabs/Bomb.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Materials/M_Ghostly.tres" type="Material" id=5]
 
+
+
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.219724
 height = 0.234796

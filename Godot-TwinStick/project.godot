@@ -15,15 +15,15 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Super Bomber Blast"
-run/main_scene="res://Scenes/Lobby.tscn"
+config/name="Boom Boys"
+run/main_scene="res://Scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-gameController="*res://Scripts/GameController.gd"
-networkController="*res://Scripts/NetworkController.gd"
-sceneLoader="*res://Scripts/SceneLoader.gd"
+gameController="*res://Scripts/Singleton/GameController.gd"
+networkController="*res://Scripts/Singleton/NetworkController.gd"
+sceneLoader="*res://Scripts/Singleton/SceneLoader.gd"
 Credits="*res://Prefabs/Credits.tscn"
 
 [input]
