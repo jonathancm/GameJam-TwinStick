@@ -4,6 +4,7 @@ extends Node
 # Internal variables
 #
 var players = {}
+var spawn_positions = {}
 var respawning = false
 
 
@@ -20,7 +21,7 @@ func _on_player_state_change(player):
 
 		print("Restarting Game...")
 		for player in players.values():
-			player.rpc("rpc_respawn", player.network_id)
+			player.rpc("rpc_respawn", spawn_positions[player.network_id])
 
 		respawning = false
 
@@ -50,6 +51,7 @@ func launch_game():
 
 
 remotesync func pre_start_game():
+	print("func pre_start_game called!")
 	var isHost:bool = is_network_master()
 	var sceneTree:MultiplayerAPI = get_tree().multiplayer
 	var myId:int = sceneTree.get_network_unique_id()
@@ -58,16 +60,21 @@ remotesync func pre_start_game():
 	var player_prefab = load("res://Prefabs/Player/Player.tscn")
 	var camera_prefab = load("res://Prefabs/Player/Camera.tscn")
 
+	# Setup Spawn Positions
+	spawn_positions.clear()
 	for net_player in networkController.registered_players.values():
-		var spawn_pos = world.get_node("SpawnPoints/" + str(net_player.seat_number)).translation
+		var spawn_point = world.get_node("SpawnPoints/" + str(net_player.seat_number))
+		spawn_positions[net_player.id] = spawn_point.global_transform.origin
 
+	# Instantiate Player Avatars
+	for net_player in networkController.registered_players.values():
 		var player = player_prefab.instance()
 		player.set_name(net_player.username)
+		player.set_network_master(net_player.id)
 		player.network_id = net_player.id
 		player.network_name = net_player.username
-		player.translation = spawn_pos
-		player.set_network_master(net_player.id)
 		world.get_node("Players").add_child(player)
+		player.global_transform.origin = spawn_positions[net_player.id]
 
 		if(isHost):
 			player.connect("state_change", self, "_on_player_state_change")
@@ -76,34 +83,28 @@ remotesync func pre_start_game():
 		if(myId != net_player.id):
 			continue
 
-		print("Init Camera")
 		var camera = camera_prefab.instance()
 		world.add_child(camera)
 		camera.connect("update_controls", player, "_on_update_controls")
 		camera.set_target(player)
 
-
-	if not get_tree().is_network_server():
-		rpc_id(1, "ready_to_start", get_tree().get_network_unique_id())
-	elif networkController.registered_players.size() == 0:
-		post_start_game()
+	# Ready to start
+	rpc_id(networkController.server_id, "ready_to_start", get_tree().get_network_unique_id())
 
 
 
 
-remote func ready_to_start(id):
-	assert(get_tree().is_network_server())
-
+remotesync func ready_to_start(id):
+	print("func ready_to_start called!")
 	if not id in networkController.players_ready:
 		networkController.players_ready.append(id)
 
 	if networkController.players_ready.size() == networkController.registered_players.size():
-		for p in networkController.players:
-			rpc_id(p, "post_start_game")
-		post_start_game()
+		rpc("post_start_game")
 
 
 
 
-remote func post_start_game():
+remotesync func post_start_game():
+	print("func post_start_game called!")
 	get_tree().set_pause(false) # Unpause and unleash the game!

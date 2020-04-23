@@ -57,7 +57,6 @@ func _on_host_pressed():
 
 	var player_name = username_input.text
 	networkController.host_game(player_name)
-	refresh_lobby()
 
 
 func _on_join_pressed():
@@ -107,9 +106,11 @@ func _on_game_error(errtxt):
 func refresh_lobby():
 	var players = networkController.get_player_list()
 	var my_seat_number = networkController.get_my_seat_number()
-	players[my_seat_number - 1] += " (You)"
+	if players.has(my_seat_number):
+		players[my_seat_number] += " (You)"
+
 	lobby_list.clear()
-	for p in players:
+	for p in players.values():
 		lobby_list.add_item(p)
 
 	button_start.disabled = not get_tree().is_network_server()
