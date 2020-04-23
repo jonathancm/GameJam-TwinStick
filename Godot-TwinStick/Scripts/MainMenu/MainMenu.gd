@@ -106,9 +106,9 @@ func _on_game_error(errtxt):
 
 func refresh_lobby():
 	var players = networkController.get_player_list()
-	players.sort()
+	var my_seat_number = networkController.get_my_seat_number()
+	players[my_seat_number - 1] += " (You)"
 	lobby_list.clear()
-	lobby_list.add_item(networkController.get_player_name() + " (You)")
 	for p in players:
 		lobby_list.add_item(p)
 

@@ -1,19 +1,12 @@
 extends KinematicBody
 
-
-
 signal state_change(player)
 
-onready var isAlive = true
-onready var left_stick = Vector2.ZERO
-onready var mouse_direction = Vector3.ZERO
-onready var jump = false
-onready var shoot = false
-onready var velocity = Vector3.ZERO
-onready var view_normal:Node
-onready var view_ghost:Node
-
-export var id = -1
+#
+# Configurable Parameters
+#
+export var network_name = ""
+export var network_id = -1
 export var max_speed = 0.5
 export var jump_velocity = 10.0
 export var inertia = 0.5
@@ -23,18 +16,30 @@ export var bombCooldown = 0.250
 export(Resource) var bomb_prefab
 export(NodePath) var view_normal_path
 export(NodePath) var view_ghost_path
+export(NodePath) var path_world_ui
 
-puppet var net_position:Vector3
-puppet var net_rotation:Quat
-
+#
+# Internal Variables
+#
+onready var isAlive = true
+onready var left_stick = Vector2.ZERO
+onready var mouse_direction = Vector3.ZERO
+onready var jump = false
+onready var shoot = false
+onready var velocity = Vector3.ZERO
+onready var view_normal:Node
+onready var view_ghost:Node
 onready var bombID = 0;
 onready var currentCooldown = summoningSickness;
 
+puppet var net_position:Vector3
+puppet var net_rotation:Quat
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_node(path_world_ui)._set_username(network_name)
 	view_normal = get_node(view_normal_path)
 	view_ghost = get_node(view_ghost_path)
 
@@ -109,12 +114,12 @@ master func _physics_process_master(dt:float):
 
 
 
-remotesync func spawn_bomb(name:String, transform:Transform):
+remotesync func spawn_bomb(_name:String, _transform:Transform):
 	var impulseStrength = 2.0
-	var impulseDirection = -transform.basis.z
+	var impulseDirection = -_transform.basis.z
 	var instance = bomb_prefab.instance()
-	instance.set_name(name)
-	instance.set_global_transform(transform)
+	instance.set_name(_name)
+	instance.set_global_transform(_transform)
 	instance.set_network_master(get_network_master())
 	get_parent().add_child(instance)
 	instance.apply_impulse(Vector3.ZERO, impulseStrength*impulseDirection)

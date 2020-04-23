@@ -21,9 +21,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-gameController="*res://Scripts/Singleton/GameController.gd"
-networkController="*res://Scripts/Singleton/NetworkController.gd"
-sceneLoader="*res://Scripts/Singleton/SceneLoader.gd"
+gameController="*res://Scripts/Singletons/GameController.gd"
+networkController="*res://Scripts/Singletons/NetworkController.gd"
+sceneLoader="*res://Scripts/Singletons/SceneLoader.gd"
 Credits="*res://Prefabs/Credits.tscn"
 
 [input]

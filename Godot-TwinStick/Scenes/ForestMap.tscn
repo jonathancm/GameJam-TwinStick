@@ -20,20 +20,17 @@ shadow_bias = 0.0
 
 [node name="SpawnPoints" type="Spatial" parent="."]
 
-[node name="0" type="Position3D" parent="SpawnPoints"]
+[node name="1" type="Position3D" parent="SpawnPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.39883, 0, 8.59536 )
 
-[node name="1" type="Position3D" parent="SpawnPoints"]
+[node name="2" type="Position3D" parent="SpawnPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.86344, 0, -8.65318 )
 
-[node name="2" type="Position3D" parent="SpawnPoints"]
+[node name="3" type="Position3D" parent="SpawnPoints"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.01488, 0, -8.88531 )
 
-[node name="3" type="Position3D" parent="SpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50026, 0, 8.34636 )
-
 [node name="4" type="Position3D" parent="SpawnPoints"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.322481, 0, -0.0476246 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.50026, 0, 8.34636 )
 
 [node name="Players" type="Spatial" parent="."]
 

@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Materials/Black.tres" type="Material" id=1]
 [ext_resource path="res://Materials/White.tres" type="Material" id=2]
 [ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=3]
 [ext_resource path="res://Prefabs/Bomb.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Materials/M_Ghostly.tres" type="Material" id=5]
-
-
+[ext_resource path="res://Prefabs/Player/PlayerWorldUI.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.219724
@@ -16,6 +15,21 @@ height = 0.234796
 
 [sub_resource type="CubeMesh" id=3]
 
+[sub_resource type="QuadMesh" id=4]
+size = Vector2( 1.5, 0.5 )
+
+[sub_resource type="ViewportTexture" id=5]
+viewport_path = NodePath("WorldUI/Viewport")
+
+[sub_resource type="SpatialMaterial" id=6]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+params_specular_mode = 4
+params_billboard_mode = 1
+albedo_texture = SubResource( 5 )
+
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 3 )
 max_speed = 5.0
@@ -24,6 +38,7 @@ inertia = 0.1
 bomb_prefab = ExtResource( 4 )
 view_normal_path = NodePath("View_Normal")
 view_ghost_path = NodePath("View_Ghost")
+path_world_ui = NodePath("WorldUI/Viewport/GUI")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -1.62921e-07, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 1.62921e-07, 7.12149e-15, -1.47872e-08, 0.338292, 2.40914e-15 )
@@ -62,3 +77,22 @@ material/0 = ExtResource( 5 )
 
 [node name="GunSocket" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.420256, -0.444968 )
+
+[node name="WorldUI" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0 )
+
+[node name="Viewport" type="Viewport" parent="WorldUI"]
+size = Vector2( 300, 100 )
+transparent_bg = true
+hdr = false
+disable_3d = true
+usage = 0
+render_target_v_flip = true
+gui_disable_input = true
+
+[node name="GUI" parent="WorldUI/Viewport" instance=ExtResource( 6 )]
+
+[node name="Quad" type="MeshInstance" parent="WorldUI"]
+cast_shadow = 0
+mesh = SubResource( 4 )
+material/0 = SubResource( 6 )
