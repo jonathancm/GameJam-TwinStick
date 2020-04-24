@@ -5,8 +5,9 @@ signal state_change(player)
 #
 # Configurable Parameters
 #
-export var network_name = ""
 export var network_id = -1
+export var network_name = ""
+export var seat_number = 0
 export var max_speed = 0.5
 export var jump_velocity = 10.0
 export var inertia = 0.5
@@ -17,6 +18,10 @@ export(Resource) var bomb_prefab
 export(NodePath) var view_normal_path
 export(NodePath) var view_ghost_path
 export(NodePath) var path_world_ui
+export(Resource) var material_player1
+export(Resource) var material_player2
+export(Resource) var material_player3
+export(Resource) var material_player4
 
 #
 # Internal Variables
@@ -42,6 +47,16 @@ func _ready():
 	get_node(path_world_ui)._set_username(network_name)
 	view_normal = get_node(view_normal_path)
 	view_ghost = get_node(view_ghost_path)
+
+	match seat_number:
+		1:
+			view_normal.set_material_override(material_player1)
+		2:
+			view_normal.set_material_override(material_player2)
+		3:
+			view_normal.set_material_override(material_player3)
+		4:
+			view_normal.set_material_override(material_player4)
 
 	view_ghost.visible = false
 	view_normal.visible = true

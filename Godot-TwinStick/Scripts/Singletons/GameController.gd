@@ -73,6 +73,7 @@ remotesync func pre_start_game():
 		player.set_network_master(net_player.id)
 		player.network_id = net_player.id
 		player.network_name = net_player.username
+		player.seat_number = net_player.seat_number
 		world.get_node("Players").add_child(player)
 		player.global_transform.origin = spawn_positions[net_player.id]
 
