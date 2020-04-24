@@ -35,15 +35,17 @@ func _ready():
 	var _error = 0;
 	_error = networkController.connect("connection_failed", self, "_on_connection_failed")
 	_error = networkController.connect("connection_succeeded", self, "_on_connection_success")
-	_error = networkController.connect("player_list_changed", self, "refresh_lobby")
-	_error = networkController.connect("game_ended", self, "_on_game_ended")
-	_error = networkController.connect("game_error", self, "_on_game_error")
+	_error = networkController.connect("player_connection", self, "refresh_lobby")
+	_error = networkController.connect("player_disconnection", self, "refresh_lobby")
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
 		username_input.text = OS.get_environment("USERNAME")
 	else:
 		var desktop_path = OS.get_system_dir(0).replace("\\", "/").split("/")
 		username_input.text = desktop_path[desktop_path.size() - 2]
+
+	if(gameController.lastErrorMessage != ""):
+		popup_error(gameController.lastErrorMessage)
 
 
 func _on_host_pressed():
@@ -88,22 +90,14 @@ func _on_connection_failed():
 	error_label.set_text("Connection failed.")
 
 
-func _on_game_ended():
-	show()
-	menu_connection.show()
-	menu_lobby.hide()
-	button_host.disabled = false
-	button_join.disabled = false
-
-
-func _on_game_error(errtxt):
+func popup_error(errtxt):
 	error_dialog.dialog_text = errtxt
 	error_dialog.popup_centered_minsize()
 	button_host.disabled = false
 	button_join.disabled = false
 
 
-func refresh_lobby():
+func refresh_lobby(_player_name):
 	var players = networkController.get_player_list()
 	var my_seat_number = networkController.get_my_seat_number()
 	if players.has(my_seat_number):

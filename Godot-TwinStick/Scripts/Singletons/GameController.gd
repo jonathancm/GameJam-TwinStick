@@ -3,9 +3,30 @@ extends Node
 #
 # Internal variables
 #
+var isMatchRunning:bool = false
+var lastErrorMessage:String = ""
 var players = {}
 var spawn_positions = {}
 var respawning = false
+
+
+func _ready():
+	var _error = 0
+	_error = networkController.connect("player_disconnection", self, "_on_player_disconnect")
+	_error = networkController.connect("network_error", self, "_on_network_error")
+
+
+
+func _on_player_disconnect(player_name):
+	if(isMatchRunning):
+		lastErrorMessage = "Player " + player_name + " disconnected"
+		end_game()
+
+
+func _on_network_error(message):
+	lastErrorMessage = message
+	if(isMatchRunning):
+		end_game()
 
 
 func _on_player_state_change(player):
@@ -45,17 +66,13 @@ func end_condition():
 
 
 
-func launch_game():
-	rpc("pre_start_game")
-
-
-
 remotesync func pre_start_game():
-	print("func pre_start_game called!")
 	var isHost:bool = is_network_master()
 	var sceneTree:MultiplayerAPI = get_tree().multiplayer
 	var myId:int = sceneTree.get_network_unique_id()
 
+	isMatchRunning = true
+	lastErrorMessage = ""
 	var world = sceneLoader.load_scene(sceneLoader.GameScene.ForestMap)
 	var player_prefab = load("res://Prefabs/Player/Player.tscn")
 	var camera_prefab = load("res://Prefabs/Player/Camera.tscn")
@@ -94,9 +111,7 @@ remotesync func pre_start_game():
 
 
 
-
 remotesync func ready_to_start(id):
-	print("func ready_to_start called!")
 	if not id in networkController.players_ready:
 		networkController.players_ready.append(id)
 
@@ -105,7 +120,12 @@ remotesync func ready_to_start(id):
 
 
 
-
 remotesync func post_start_game():
-	print("func post_start_game called!")
 	get_tree().set_pause(false) # Unpause and unleash the game!
+
+
+
+remotesync func end_game():
+	isMatchRunning = false
+	sceneLoader.load_scene(sceneLoader.GameScene.MainMenu)
+	networkController.server_cleanup()

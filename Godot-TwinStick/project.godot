@@ -24,7 +24,7 @@ config/icon="res://icon.png"
 gameController="*res://Scripts/Singletons/GameController.gd"
 networkController="*res://Scripts/Singletons/NetworkController.gd"
 sceneLoader="*res://Scripts/Singletons/SceneLoader.gd"
-Credits="*res://Prefabs/Credits.tscn"
+Credits="*res://Prefabs/GUI/Credits.tscn"
 
 [input]
 

@@ -57,8 +57,8 @@ remotesync func net_explode_and_destroy():
 	instance.global_transform.origin = global_transform.origin
 	queue_free()
 
-master func rpc_take_damage(_damage:float):
 
+master func rpc_take_damage(_damage:float):
 	if(damage <= 0):
 		return
 

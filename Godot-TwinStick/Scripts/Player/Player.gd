@@ -87,7 +87,6 @@ func _process(delta):
 
 
 func _physics_process(dt:float):
-
 	if(is_network_master()):
 		_physics_process_master(dt)
 		return
@@ -99,8 +98,6 @@ func _physics_process(dt:float):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 master func _physics_process_master(dt:float):
-
-
 	var direction:Vector3 = mouse_direction
 	direction.y = 0
 
@@ -120,7 +117,6 @@ master func _physics_process_master(dt:float):
 		velocity.y = jump_velocity
 
 	velocity = move_and_slide(velocity, Vector3.UP)
-
 	rset("net_position", global_transform.origin)
 	rset("net_rotation", global_transform.basis.get_rotation_quat())
 
@@ -153,7 +149,6 @@ func _on_update_controls(_left_stick:Vector2, _mouse_direction:Vector3, _jump:bo
 
 remotesync func rpc_set_alive(var _is_alive):
 	isAlive = _is_alive
-
 	view_normal.visible = isAlive
 	view_ghost.visible = !isAlive
 	emit_signal("state_change", self)
@@ -170,7 +165,4 @@ master func rpc_take_damage(_amount:float):
 master func rpc_respawn(_position:Vector3):
 	global_transform.origin = _position
 	rpc("rpc_set_alive", true)
-
-
-
 

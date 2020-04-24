@@ -19,12 +19,12 @@ var my_network_info = NetworkPlayer.new()
 var registered_players = {}
 var players_ready = []
 
-# Signals to let lobby GUI know what's going on.
-signal player_list_changed()
+# Signals
+signal player_connection(player_name)
+signal player_disconnection(player_name)
 signal connection_failed()
 signal connection_succeeded()
-signal game_ended()
-signal game_error(what)
+signal network_error(message)
 
 
 func _ready():
@@ -34,6 +34,10 @@ func _ready():
 	_error = get_tree().connect("connected_to_server", self, "_connected_ok")
 	_error = get_tree().connect("connection_failed", self, "_connected_fail")
 	_error = get_tree().connect("server_disconnected", self, "_server_disconnected")
+
+
+func _exit_tree():
+	server_cleanup()
 
 
 # On Button press
@@ -55,17 +59,11 @@ func join_game(ip, new_player_name):
 
 func begin_game():
 	assert(get_tree().is_network_server())
-	gameController.launch_game()
+	gameController.rpc("pre_start_game")
 
 
-func end_game():
-	if has_node("/root/ForestMap"): # Game is in progress.
-		get_node("/root/ForestMap").queue_free()
-
-	emit_signal("game_ended")
+master func server_cleanup():
 	registered_players.clear()
-	if(is_network_master()):
-		get_tree().set_network_peer(null)
 
 
 #
@@ -85,8 +83,7 @@ func _connected_ok():
 
 # Callback from SceneTree, only for clients (not server).
 func _server_disconnected():
-	emit_signal("game_error", "Server disconnected")
-	end_game()
+	emit_signal("network_error", "Server disconnected")
 
 
 # Callback from SceneTree, only for clients (not server).
@@ -97,37 +94,30 @@ func _connected_fail():
 
 # Callback from SceneTree.
 func _player_disconnected(id):
-	if has_node("/root/ForestMap"): # Game is in progress.
-		emit_signal("game_error", "Player " + registered_players[id].username + " disconnected")
-		end_game()
-	elif get_tree().is_network_server(): # Game is not in progress.
-		host_unregister_player(id)
+	if(get_tree().is_network_server()):
+		server_unregister_player(id)
 
 
 # Lobby management functions.
 remotesync func request_username():
-	rpc_id(server_id,"host_register_player", my_network_info.username)
+	rpc_id(server_id,"server_register_player", my_network_info.username)
 
 
-remotesync func host_register_player(username):
-	assert(is_network_master())
+master func server_register_player(username):
 	var id = get_tree().get_rpc_sender_id()
 	registered_players[id] = NetworkPlayer.new()
 	registered_players[id].id = id
 	registered_players[id].username = username
 	registered_players[id].seat_number = registered_players.size()
 
-	# TODO: modify code to support sending classes by RPC
+	# TODO: modify code to support sending classes by RPC, send registered_players
 	for player in registered_players.values():
 		rpc("update_player_info", player.id, player.username, player.seat_number)
 
 
-func host_unregister_player(id):
-	assert(is_network_master())
-	registered_players.erase(id)
-
-	# TODO: modify code to support sending classes by RPC
-	rpc("remove_player_info", registered_players)
+master func server_unregister_player(id):
+	# TODO: modify code to support sending classes by RPC, send registered_players
+	rpc("remove_player_info", id)
 
 
 remotesync func update_player_info(id, username, seat_number):
@@ -139,15 +129,18 @@ remotesync func update_player_info(id, username, seat_number):
 	registered_players[id].id = id
 	registered_players[id].username = username
 	registered_players[id].seat_number = seat_number
-	emit_signal("player_list_changed")
+	emit_signal("player_connection", id)
+
 
 remotesync func remove_player_info(id):
 	if(id == get_tree().get_network_unique_id()):
 		my_network_info.id = -1
 		my_network_info.seat_number = 0
 
-	registered_players.remove(id)
-	emit_signal("player_list_changed")
+	var player_name = registered_players[id].username
+	if(registered_players.has(id)):
+		registered_players.erase(id)
+		emit_signal("player_disconnection", player_name)
 
 
 
@@ -165,7 +158,6 @@ func get_my_seat_number():
 
 func get_player_list():
 	var player_names = {}
-	print(str(registered_players))
 	for player in registered_players.values():
 		player_names[player.seat_number] = player.username
 	return player_names
