@@ -6,19 +6,20 @@ class NetworkPlayer:
 	var seat_number:int = 0
 	var score:int = 0
 
-# Godot default Server ID
-const server_id = 1
+#
+# Constants
+#
+const server_id = 1 # Godot default Server ID
+const DEFAULT_PORT = 10567 # Default game port. Can be any number between 1024 and 49151.
+const MAX_PEERS = 4 # Max number of players.
 
-# Default game port. Can be any number between 1024 and 49151.
-const DEFAULT_PORT = 10567
-
-# Max number of players.
-const MAX_PEERS = 4
-
-# Player Network Infos
+#
+# Internal Variables
+#
+var host = null
 var my_network_info = NetworkPlayer.new()
 var registered_players = {}
-var players_ready = []
+
 
 # Signals
 signal player_connection(player_name)
@@ -44,12 +45,13 @@ func _exit_tree():
 # On Button press
 func host_game(new_player_name):
 	my_network_info.username = new_player_name
-	if(get_tree().get_network_peer() == null):
-		var host = NetworkedMultiplayerENet.new()
-		host.create_server(DEFAULT_PORT, MAX_PEERS)
-		get_tree().set_network_peer(host)
-	else:
-		print("Cannot create server: a server is already running")
+
+	if(host != null):
+		host.close_connection()
+
+	host = NetworkedMultiplayerENet.new()
+	host.create_server(DEFAULT_PORT, MAX_PEERS)
+	get_tree().set_network_peer(host)
 
 	_player_connected(server_id)
 

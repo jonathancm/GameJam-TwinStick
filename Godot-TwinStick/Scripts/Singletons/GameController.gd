@@ -5,10 +5,11 @@ extends Node
 #
 var isMatchRunning:bool = false
 var lastErrorMessage:String = ""
-var players = {}
-var spawn_positions = {}
 var respawning = false
 var round_number = 0
+var players = {}
+var players_ready = []
+var spawn_positions = {}
 
 #
 # Signals
@@ -98,16 +99,14 @@ remotesync func pre_start_game():
 	var myId:int = sceneTree.get_network_unique_id()
 
 	# Reset match state
+	reset_state()
 	isMatchRunning = true
-	lastErrorMessage = ""
-	round_number = 0
 
 	var world = sceneLoader.load_scene(sceneLoader.GameScene.ForestMap)
 	var player_prefab = load("res://Prefabs/Player/Player.tscn")
 	var camera_prefab = load("res://Prefabs/Player/Camera.tscn")
 
 	# Setup Spawn Positions
-	spawn_positions.clear()
 	for net_player in networkController.registered_players.values():
 		var spawn_point = world.get_node("SpawnPoints/" + str(net_player.seat_number))
 		spawn_positions[net_player.id] = spawn_point.global_transform.origin
@@ -141,10 +140,10 @@ remotesync func pre_start_game():
 
 
 remotesync func ready_to_start(id):
-	if not id in networkController.players_ready:
-		networkController.players_ready.append(id)
+	if not id in players_ready:
+		players_ready.append(id)
 
-	if networkController.players_ready.size() == networkController.registered_players.size():
+	if players_ready.size() == networkController.registered_players.size():
 		rpc("post_start_game")
 
 
@@ -160,3 +159,12 @@ remotesync func end_game():
 	isMatchRunning = false
 	sceneLoader.load_scene(sceneLoader.GameScene.MainMenu)
 	networkController.server_cleanup()
+
+
+func reset_state():
+	isMatchRunning = false
+	lastErrorMessage = ""
+	round_number = 0
+	players.clear()
+	players_ready.clear()
+	spawn_positions.clear()
