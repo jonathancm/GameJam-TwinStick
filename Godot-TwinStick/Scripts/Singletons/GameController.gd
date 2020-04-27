@@ -8,7 +8,14 @@ var lastErrorMessage:String = ""
 var players = {}
 var spawn_positions = {}
 var respawning = false
+var round_number = 0
 
+#
+# Signals
+#
+signal game_started()
+signal round_started()
+signal round_ended(winner_id)
 
 func _ready():
 	var _error = 0
@@ -36,11 +43,19 @@ func _on_player_state_change(player):
 	players[player.network_id] = player
 
 	if(end_condition()):
-		print("A player has won! But I don't know who!")
 		respawning = true
-		yield(get_tree().create_timer(5.0), "timeout")
 
-		print("Restarting Game...")
+		# End current round
+		var winner_id = -1
+		for player in players.values():
+			if(player.isAlive):
+				winner_id = player.network_id
+				networkController.rpc("increase_player_score", player.network_id, 1)
+		rpc("trigger_round_end", winner_id)
+
+		# Start new round after delay
+		yield(get_tree().create_timer(5.0), "timeout")
+		rpc("trigger_round_start", round_number + 1)
 		for player in players.values():
 			player.rpc("rpc_respawn", spawn_positions[player.network_id])
 
@@ -66,13 +81,27 @@ func end_condition():
 
 
 
+remotesync func trigger_round_start(_round_number):
+	round_number = _round_number
+	emit_signal("round_started")
+
+
+
+remotesync func trigger_round_end(winner_id):
+	emit_signal("round_ended",winner_id)
+
+
+
 remotesync func pre_start_game():
 	var isHost:bool = is_network_master()
 	var sceneTree:MultiplayerAPI = get_tree().multiplayer
 	var myId:int = sceneTree.get_network_unique_id()
 
+	# Reset match state
 	isMatchRunning = true
 	lastErrorMessage = ""
+	round_number = 0
+
 	var world = sceneLoader.load_scene(sceneLoader.GameScene.ForestMap)
 	var player_prefab = load("res://Prefabs/Player/Player.tscn")
 	var camera_prefab = load("res://Prefabs/Player/Camera.tscn")
@@ -93,10 +122,10 @@ remotesync func pre_start_game():
 		player.seat_number = net_player.seat_number
 		world.get_node("Players").add_child(player)
 		player.global_transform.origin = spawn_positions[net_player.id]
+		players[player.network_id] = player
 
 		if(isHost):
 			player.connect("state_change", self, "_on_player_state_change")
-			players[player.network_id] = player
 
 		if(myId != net_player.id):
 			continue
@@ -121,6 +150,8 @@ remotesync func ready_to_start(id):
 
 
 remotesync func post_start_game():
+	round_number = 1
+	emit_signal("game_started")
 	get_tree().set_pause(false) # Unpause and unleash the game!
 
 

@@ -4,6 +4,7 @@ class NetworkPlayer:
 	var id:int = -1
 	var username:String = "Spectator"
 	var seat_number:int = 0
+	var score:int = 0
 
 # Godot default Server ID
 const server_id = 1
@@ -43,14 +44,18 @@ func _exit_tree():
 # On Button press
 func host_game(new_player_name):
 	my_network_info.username = new_player_name
-	var host = NetworkedMultiplayerENet.new()
-	host.create_server(DEFAULT_PORT, MAX_PEERS)
-	get_tree().set_network_peer(host)
+	if(get_tree().get_network_peer() == null):
+		var host = NetworkedMultiplayerENet.new()
+		host.create_server(DEFAULT_PORT, MAX_PEERS)
+		get_tree().set_network_peer(host)
+	else:
+		print("Cannot create server: a server is already running")
+
 	_player_connected(server_id)
 
 
 # On Button press
-func join_game(ip, new_player_name):
+func join_game(ip, new_player_name:String):
 	my_network_info.username = new_player_name
 	var client = NetworkedMultiplayerENet.new()
 	client.create_client(ip, DEFAULT_PORT)
@@ -70,7 +75,7 @@ master func server_cleanup():
 # Network Callbacks from SceneTree
 #
 # Callback from SceneTree.
-func _player_connected(id):
+func _player_connected(id:int):
 	if(get_tree().is_network_server()):
 		rpc_id(id, "request_username")
 
@@ -93,7 +98,7 @@ func _connected_fail():
 
 
 # Callback from SceneTree.
-func _player_disconnected(id):
+func _player_disconnected(id:int):
 	if(get_tree().is_network_server()):
 		server_unregister_player(id)
 
@@ -103,7 +108,7 @@ remotesync func request_username():
 	rpc_id(server_id,"server_register_player", my_network_info.username)
 
 
-master func server_register_player(username):
+master func server_register_player(username:String):
 	var id = get_tree().get_rpc_sender_id()
 	registered_players[id] = NetworkPlayer.new()
 	registered_players[id].id = id
@@ -112,15 +117,15 @@ master func server_register_player(username):
 
 	# TODO: modify code to support sending classes by RPC, send registered_players
 	for player in registered_players.values():
-		rpc("update_player_info", player.id, player.username, player.seat_number)
+		rpc("update_player_info", player.id, player.username, player.seat_number, player.score)
 
 
-master func server_unregister_player(id):
+master func server_unregister_player(id:int):
 	# TODO: modify code to support sending classes by RPC, send registered_players
 	rpc("remove_player_info", id)
 
 
-remotesync func update_player_info(id, username, seat_number):
+remotesync func update_player_info(id:int, username:String, seat_number:int, score:int):
 	if(id == get_tree().get_network_unique_id()):
 		my_network_info.id = id
 		my_network_info.seat_number = seat_number
@@ -129,10 +134,11 @@ remotesync func update_player_info(id, username, seat_number):
 	registered_players[id].id = id
 	registered_players[id].username = username
 	registered_players[id].seat_number = seat_number
+	registered_players[id].score = score
 	emit_signal("player_connection", id)
 
 
-remotesync func remove_player_info(id):
+remotesync func remove_player_info(id:int):
 	if(id == get_tree().get_network_unique_id()):
 		my_network_info.id = -1
 		my_network_info.seat_number = 0
@@ -142,6 +148,10 @@ remotesync func remove_player_info(id):
 		registered_players.erase(id)
 		emit_signal("player_disconnection", player_name)
 
+
+remotesync func increase_player_score(id:int, amount:int):
+	if(registered_players.has(id)):
+		registered_players[id].score += amount
 
 
 #
@@ -161,3 +171,9 @@ func get_player_list():
 	for player in registered_players.values():
 		player_names[player.seat_number] = player.username
 	return player_names
+
+func get_player_score(id:int):
+	if(registered_players.has(id)):
+		return registered_players[id].score
+	else:
+		return 0
