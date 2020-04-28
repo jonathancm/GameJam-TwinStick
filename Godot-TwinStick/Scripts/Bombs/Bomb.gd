@@ -13,10 +13,13 @@ export var damage:float = 1.0
 export(Resource) var explosion_prefab
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	var _error = gameController.connect("round_ended", self, "_on_round_ended")
 
+func _on_round_ended(_winner_id):
+	if(is_network_master()):
+		timeleft = 0
+		damage = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(dt):
