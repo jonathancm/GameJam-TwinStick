@@ -32,10 +32,7 @@ func _on_game_start():
 
 		player_uis[player.network_id] = prefab_player_ui.instance()
 		container_player_uis.add_child(player_uis[player.network_id])
-
-		player_uis[player.network_id].set_username(player.network_name)
-		player_uis[player.network_id].set_icon(player.seat_number)
-		player_uis[player.network_id].set_score(networkController.get_player_score(player.network_id))
+		player_uis[player.network_id].set_assigned_player(player)
 		_on_round_start()
 
 
@@ -46,7 +43,6 @@ func _on_round_start():
 
 func _on_round_end(winner_id):
 	if(gameController.players.has(winner_id)):
-		player_uis[winner_id].set_score(networkController.get_player_score(winner_id))
 		var winner_name = gameController.players[winner_id].network_name
 		label_round_end.text = winner_name + " wins the round!"
 	else:

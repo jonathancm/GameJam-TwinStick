@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Materials/M_Player_Black.tres" type="Material" id=1]
 [ext_resource path="res://Materials/M_White.tres" type="Material" id=2]
@@ -9,6 +9,11 @@
 [ext_resource path="res://Materials/M_Player_Blue.tres" type="Material" id=7]
 [ext_resource path="res://Materials/M_Player_Red.tres" type="Material" id=8]
 [ext_resource path="res://Materials/M_Player_Yellow.tres" type="Material" id=9]
+[ext_resource path="res://Sources/PlayerIcons/IconPlayerBlue.png" type="Texture" id=10]
+[ext_resource path="res://Sources/PlayerIcons/IconPlayerBlack.png" type="Texture" id=11]
+[ext_resource path="res://Sources/PlayerIcons/IconPlayerGhost.png" type="Texture" id=12]
+[ext_resource path="res://Sources/PlayerIcons/IconPlayerRed.png" type="Texture" id=13]
+[ext_resource path="res://Sources/PlayerIcons/IconPlayerYellow.png" type="Texture" id=14]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.219724
@@ -46,6 +51,11 @@ material_player1 = ExtResource( 8 )
 material_player2 = ExtResource( 7 )
 material_player3 = ExtResource( 9 )
 material_player4 = ExtResource( 1 )
+player_icon_1 = ExtResource( 13 )
+player_icon_2 = ExtResource( 10 )
+player_icon_3 = ExtResource( 14 )
+player_icon_4 = ExtResource( 11 )
+player_icon_ghost = ExtResource( 12 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -1.62921e-07, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 1.62921e-07, 7.12149e-15, -1.47872e-08, 0.338292, 2.40914e-15 )

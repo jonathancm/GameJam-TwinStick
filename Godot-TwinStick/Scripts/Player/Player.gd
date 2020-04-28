@@ -22,6 +22,11 @@ export(Resource) var material_player1
 export(Resource) var material_player2
 export(Resource) var material_player3
 export(Resource) var material_player4
+export(Resource) var player_icon_1
+export(Resource) var player_icon_2
+export(Resource) var player_icon_3
+export(Resource) var player_icon_4
+export(Resource) var player_icon_ghost
 
 #
 # Internal Variables
@@ -165,4 +170,24 @@ master func rpc_take_damage(_amount:float):
 master func rpc_respawn(_position:Vector3):
 	global_transform.origin = _position
 	rpc("rpc_set_alive", true)
+
+
+func get_player_icon():
+	var player_icon = null
+	if(isAlive):
+		match seat_number:
+			1:
+				player_icon = player_icon_1
+			2:
+				player_icon = player_icon_2
+			3:
+				player_icon = player_icon_3
+			4:
+				player_icon = player_icon_4
+			_:
+				player_icon = player_icon_1
+	else:
+		player_icon =  player_icon_ghost
+
+	return player_icon
 
