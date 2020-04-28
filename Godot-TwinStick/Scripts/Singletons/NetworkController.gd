@@ -145,8 +145,8 @@ remotesync func remove_player_info(id:int):
 		my_network_info.id = -1
 		my_network_info.seat_number = 0
 
-	var player_name = registered_players[id].username
 	if(registered_players.has(id)):
+		var player_name = registered_players[id].username
 		registered_players.erase(id)
 		emit_signal("player_disconnection", player_name)
 

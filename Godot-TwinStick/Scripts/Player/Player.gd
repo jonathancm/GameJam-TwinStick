@@ -44,11 +44,15 @@ onready var currentCooldown = summoningSickness;
 
 puppet var net_position:Vector3
 puppet var net_rotation:Quat
-
+var isShootAllowed:bool = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var _error = 0
+	_error = gameController.connect("round_started", self, "_on_round_started")
+	_error = gameController.connect("round_ended", self, "_on_round_ended")
+
 	get_node(path_world_ui)._set_username(network_name)
 	view_normal = get_node(view_normal_path)
 	view_ghost = get_node(view_ghost_path)
@@ -67,18 +71,23 @@ func _ready():
 	view_normal.visible = true
 
 
+func _on_round_started():
+	isShootAllowed = true
+
+func _on_round_ended(_winner_id):
+	isShootAllowed = false
 
 
 func _process(delta):
 	if(is_network_master() == false):
 		return
 
-	if(isAlive == false):
-		return
-
 	currentCooldown -= delta
 	if(currentCooldown <= 0):
 		currentCooldown = 0
+
+	if(isAlive == false or isShootAllowed == false):
+		return
 
 	if(shoot and currentCooldown == 0):
 		currentCooldown = bombCooldown

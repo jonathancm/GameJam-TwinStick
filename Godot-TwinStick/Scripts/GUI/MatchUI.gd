@@ -20,23 +20,14 @@ var player_uis = {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var _error = 0
-	_error = gameController.connect("game_started", self, "_on_game_start")
 	_error = gameController.connect("round_started", self, "_on_round_start")
 	_error = gameController.connect("round_ended", self, "_on_round_end")
 
 
-func _on_game_start():
-	for player in gameController.players.values():
-		if(player.seat_number <= 0):
-			continue
-
-		player_uis[player.network_id] = prefab_player_ui.instance()
-		container_player_uis.add_child(player_uis[player.network_id])
-		player_uis[player.network_id].set_assigned_player(player)
-		_on_round_start()
-
-
 func _on_round_start():
+	if(player_uis.size() == 0):
+		_populate_player_uis()
+
 	label_round_end.text = ""
 	label_round_number.text = str(gameController.round_number)
 
@@ -47,3 +38,13 @@ func _on_round_end(winner_id):
 		label_round_end.text = winner_name + " wins the round!"
 	else:
 		label_round_end.text = "Everybody lost!"
+
+func _populate_player_uis():
+	player_uis.clear()
+	for player in gameController.players.values():
+		if(player.seat_number <= 0):
+			continue
+
+		player_uis[player.network_id] = prefab_player_ui.instance()
+		container_player_uis.add_child(player_uis[player.network_id])
+		player_uis[player.network_id].set_assigned_player(player)

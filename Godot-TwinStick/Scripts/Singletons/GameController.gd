@@ -14,7 +14,6 @@ var spawn_positions = {}
 #
 # Signals
 #
-signal game_started()
 signal round_started()
 signal round_ended(winner_id)
 
@@ -150,7 +149,7 @@ remotesync func ready_to_start(id):
 
 remotesync func post_start_game():
 	round_number = 1
-	emit_signal("game_started")
+	emit_signal("round_started")
 	get_tree().set_pause(false) # Unpause and unleash the game!
 
 
